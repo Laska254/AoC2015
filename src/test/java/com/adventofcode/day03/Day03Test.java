@@ -30,11 +30,31 @@ class Day03Test {
         assertEquals(expectedHouses, day03.deliverYourself(instructions));
     }
 
+    /*
+     ^v delivers presents to 3 houses, because Santa goes north, and then Robo-Santa goes south.
+     ^>v< now delivers presents to 3 houses, and Santa and Robo-Santa end up back where they started.
+     ^v^v^v^v^v now delivers presents to 11 houses, with Santa going one direction and Robo-Santa going the other.
+    */
+    @ParameterizedTest
+    @MethodSource("deliverWithRoboArgs")
+    void deliverWithRobo(List<Character> instructions, int expectedHouses) {
+        assertEquals(expectedHouses, day03.deliverWithRobo(instructions));
+    }
+
+
     private static Stream<Arguments> deliverYourselfArgs() {
         return Stream.of(
                 Arguments.of(List.of('>'), 2),
                 Arguments.of(List.of('^', '>', 'v', '<'), 4),
                 Arguments.of(List.of('^', 'v', '^', 'v', '^', 'v', '^', 'v', '^', 'v'), 2)
+        );
+    }
+
+    private static Stream<Arguments> deliverWithRoboArgs() {
+        return Stream.of(
+                Arguments.of(List.of('^', 'v'), 3),
+                Arguments.of(List.of('^', '>', 'v', '<'), 3),
+                Arguments.of(List.of('^', 'v', '^', 'v', '^', 'v', '^', 'v', '^', 'v'), 11)
         );
     }
 
