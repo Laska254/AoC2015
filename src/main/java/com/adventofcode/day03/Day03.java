@@ -22,6 +22,7 @@ public class Day03 {
         boolean santaTurn = true;
         Coordinates santaCoords = new Coordinates(0, 0);
         Coordinates roboSantaCoords = new Coordinates(0, 0);
+        visitedHouses.put(santaCoords, 2);
         for (char direction : instructions) {
             if (santaTurn) {
                 santaCoords = move(santaCoords, direction);
@@ -44,4 +45,5 @@ public class Day03 {
             default -> throw new IllegalStateException("Unexpected value: " + direction);
         };
     }
+
 }
