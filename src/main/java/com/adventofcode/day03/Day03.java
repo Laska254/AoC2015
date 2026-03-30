@@ -2,6 +2,7 @@ package com.adventofcode.day03;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Day03 {
 
@@ -11,7 +12,7 @@ public class Day03 {
         visitedHouses.put(coords, visitedHouses.getOrDefault(coords, 0) + 1);
         for (char direction : instructions) {
             coords = move(coords, direction);
-            visitedHouses.put(coords, visitedHouses.getOrDefault(coords, 0) + 1);
+            visit(visitedHouses, coords);
         }
         return visitedHouses.size();
     }
@@ -25,10 +26,10 @@ public class Day03 {
         for (char direction : instructions) {
             if (santaTurn) {
                 santaCoords = move(santaCoords, direction);
-                visitedHouses.put(santaCoords, visitedHouses.getOrDefault(santaCoords, 0) + 1);
+                visit(visitedHouses, santaCoords);
             } else {
                 roboSantaCoords = move(roboSantaCoords, direction);
-                visitedHouses.put(roboSantaCoords, visitedHouses.getOrDefault(roboSantaCoords, 0) + 1);
+                visit(visitedHouses, roboSantaCoords);
             }
             santaTurn = !santaTurn;
         }
@@ -43,6 +44,10 @@ public class Day03 {
             case 'v' -> coords.withY(coords.y() - 1);
             default -> throw new IllegalStateException("Unexpected value: " + direction);
         };
+    }
+
+    private void visit(final Map<Coordinates, Integer> houses, final Coordinates coords) {
+        houses.merge(coords, 1, Integer::sum);
     }
 
 }
