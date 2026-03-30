@@ -87,9 +87,9 @@ public class Main {
     private static void day03() {
         File file = new File("src/main/resources/inputs/day03.txt");
         Day03 day03 = new Day03();
-        List<Character> input = inputAsListOfCharacters(file);
-        System.out.println("Day 3, part I result: " + day03.deliverYourself(input));
-        System.out.println("Day 3, part II result: " + day03.deliverWithRobo(input));
+        String input = inputAsString(file);
+        System.out.println("Day 3, part I result: " + day03.deliver(input, 1));
+        System.out.println("Day 3, part II result: " + day03.deliver(input, 2));
     }
 
     private static void day04() {
@@ -222,6 +222,14 @@ public class Main {
         Day21 day21 = new Day21();
         int minCostToWin = day21.calculateMinimalGoldToWin();
         System.out.println("Day 21, part I result: " + minCostToWin);
+    }
+
+    private static String inputAsString(File file) {
+        try {
+            return Files.readString(file.toPath()).trim();
+        } catch (IOException exception) {
+            throw new RuntimeException("File not found: " + file.getAbsolutePath(), exception);
+        }
     }
 
     private static List<Character> inputAsListOfCharacters(File file) {

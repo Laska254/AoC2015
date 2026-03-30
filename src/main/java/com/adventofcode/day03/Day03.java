@@ -1,41 +1,25 @@
 package com.adventofcode.day03;
 
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Day03 {
 
-    public int deliverYourself(List<Character> instructions) {
-        Map<Coordinates, Integer> visitedHouses = new HashMap<>();
-        Coordinates coords = new Coordinates(0, 0);
-        visitedHouses.put(coords, visitedHouses.getOrDefault(coords, 0) + 1);
-        for (char direction : instructions) {
-            coords = move(coords, direction);
-            visitedHouses.put(coords, visitedHouses.getOrDefault(coords, 0) + 1);
+    public int deliver(final String instructions, final int workers) {
+        final var visitedHouses = new HashMap<Coordinates, Integer>();
+        final var positions = new Coordinates[workers];
+        Arrays.fill(positions, new Coordinates(0, 0));
+        visit(visitedHouses, positions[0]);
+        for (int i = 0; i < instructions.length(); i++) {
+            final int idx = i % workers;
+            positions[idx] = move(positions[idx], instructions.charAt(i));
+            visit(visitedHouses, positions[idx]);
         }
         return visitedHouses.size();
     }
 
-    public int deliverWithRobo(List<Character> instructions) {
-        Map<Coordinates, Integer> visitedHouses = new HashMap<>();
-        boolean santaTurn = true;
-        Coordinates santaCoords = new Coordinates(0, 0);
-        Coordinates roboSantaCoords = new Coordinates(0, 0);
-        for (char direction : instructions) {
-            if (santaTurn) {
-                santaCoords = move(santaCoords, direction);
-                visitedHouses.put(santaCoords, visitedHouses.getOrDefault(santaCoords, 0) + 1);
-            } else {
-                roboSantaCoords = move(roboSantaCoords, direction);
-                visitedHouses.put(roboSantaCoords, visitedHouses.getOrDefault(roboSantaCoords, 0) + 1);
-            }
-            santaTurn = !santaTurn;
-        }
-        return visitedHouses.size();
-    }
-
-    private Coordinates move(Coordinates coords, char direction) {
+    private Coordinates move(final Coordinates coords, final char direction) {
         return switch (direction) {
             case '>' -> coords.withX(coords.x() + 1);
             case '<' -> coords.withX(coords.x() - 1);
@@ -44,4 +28,9 @@ public class Day03 {
             default -> throw new IllegalStateException("Unexpected value: " + direction);
         };
     }
+
+    private void visit(final Map<Coordinates, Integer> houses, final Coordinates coords) {
+        houses.merge(coords, 1, Integer::sum);
+    }
+
 }
