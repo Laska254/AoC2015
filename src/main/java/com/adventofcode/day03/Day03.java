@@ -2,13 +2,12 @@ package com.adventofcode.day03;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Day03 {
 
-    public int deliverYourself(List<Character> instructions) {
-        Map<Coordinates, Integer> visitedHouses = new HashMap<>();
-        Coordinates coords = new Coordinates(0, 0);
+    public int deliverYourself(final List<Character> instructions) {
+        final var visitedHouses = new HashMap<Coordinates, Integer>();
+        var coords = new Coordinates(0, 0);
         visitedHouses.put(coords, visitedHouses.getOrDefault(coords, 0) + 1);
         for (char direction : instructions) {
             coords = move(coords, direction);
@@ -17,11 +16,11 @@ public class Day03 {
         return visitedHouses.size();
     }
 
-    public int deliverWithRobo(List<Character> instructions) {
-        Map<Coordinates, Integer> visitedHouses = new HashMap<>();
-        boolean santaTurn = true;
-        Coordinates santaCoords = new Coordinates(0, 0);
-        Coordinates roboSantaCoords = new Coordinates(0, 0);
+    public int deliverWithRobo(final List<Character> instructions) {
+        final var visitedHouses = new HashMap<Coordinates, Integer>();
+        var santaTurn = true;
+        var santaCoords = new Coordinates(0, 0);
+        var roboSantaCoords = new Coordinates(0, 0);
         visitedHouses.put(santaCoords, 2);
         for (char direction : instructions) {
             if (santaTurn) {
@@ -36,7 +35,7 @@ public class Day03 {
         return visitedHouses.size();
     }
 
-    private Coordinates move(Coordinates coords, char direction) {
+    private Coordinates move(final Coordinates coords, final char direction) {
         return switch (direction) {
             case '>' -> coords.withX(coords.x() + 1);
             case '<' -> coords.withX(coords.x() - 1);
