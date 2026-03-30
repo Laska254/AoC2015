@@ -21,8 +21,7 @@ public class Day04 {
 
     public int findLowestPossibleNumber(final String secretKey, final String requirement) {
         for (int number = 1; ; number++) {
-            String hash = calculateMD5(secretKey + number);
-            if (hash.startsWith(requirement)) {
+            if (calculateMD5(secretKey + number).startsWith(requirement)) {
                 return number;
             }
         }
