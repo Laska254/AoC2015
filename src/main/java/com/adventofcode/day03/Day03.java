@@ -1,37 +1,21 @@
 package com.adventofcode.day03;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Day03 {
 
-    public int deliverYourself(final List<Character> instructions) {
+    public int deliver(final List<Character> instructions, final int workers) {
         final var visitedHouses = new HashMap<Coordinates, Integer>();
-        var coords = new Coordinates(0, 0);
-        visitedHouses.put(coords, visitedHouses.getOrDefault(coords, 0) + 1);
-        for (char direction : instructions) {
-            coords = move(coords, direction);
-            visit(visitedHouses, coords);
-        }
-        return visitedHouses.size();
-    }
-
-    public int deliverWithRobo(final List<Character> instructions) {
-        final var visitedHouses = new HashMap<Coordinates, Integer>();
-        var santaTurn = true;
-        var santaCoords = new Coordinates(0, 0);
-        var roboSantaCoords = new Coordinates(0, 0);
-        visitedHouses.put(santaCoords, 2);
-        for (char direction : instructions) {
-            if (santaTurn) {
-                santaCoords = move(santaCoords, direction);
-                visit(visitedHouses, santaCoords);
-            } else {
-                roboSantaCoords = move(roboSantaCoords, direction);
-                visit(visitedHouses, roboSantaCoords);
-            }
-            santaTurn = !santaTurn;
+        final var positions = new Coordinates[workers];
+        Arrays.fill(positions, new Coordinates(0, 0));
+        visit(visitedHouses, positions[0]);
+        for (int i = 0; i < instructions.size(); i++) {
+            final int idx = i % workers;
+            positions[idx] = move(positions[idx], instructions.get(i));
+            visit(visitedHouses, positions[idx]);
         }
         return visitedHouses.size();
     }

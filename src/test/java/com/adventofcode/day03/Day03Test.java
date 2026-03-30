@@ -27,7 +27,7 @@ class Day03Test {
     @ParameterizedTest
     @MethodSource("deliverYourselfArgs")
     void deliverYourself(List<Character> instructions, int expectedHouses) {
-        assertEquals(expectedHouses, day03.deliverYourself(instructions));
+        assertEquals(expectedHouses, day03.deliver(instructions, 1));
     }
 
     /*
@@ -38,7 +38,7 @@ class Day03Test {
     @ParameterizedTest
     @MethodSource("deliverWithRoboArgs")
     void deliverWithRobo(List<Character> instructions, int expectedHouses) {
-        assertEquals(expectedHouses, day03.deliverWithRobo(instructions));
+        assertEquals(expectedHouses, day03.deliver(instructions, 2));
     }
 
 
