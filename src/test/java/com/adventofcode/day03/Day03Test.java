@@ -5,7 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,7 +25,7 @@ class Day03Test {
      */
     @ParameterizedTest
     @MethodSource("deliverYourselfArgs")
-    void deliverYourself(List<Character> instructions, int expectedHouses) {
+    void deliverYourself(String instructions, int expectedHouses) {
         assertEquals(expectedHouses, day03.deliver(instructions, 1));
     }
 
@@ -37,24 +36,24 @@ class Day03Test {
     */
     @ParameterizedTest
     @MethodSource("deliverWithRoboArgs")
-    void deliverWithRobo(List<Character> instructions, int expectedHouses) {
+    void deliverWithRobo(String instructions, int expectedHouses) {
         assertEquals(expectedHouses, day03.deliver(instructions, 2));
     }
 
 
     private static Stream<Arguments> deliverYourselfArgs() {
         return Stream.of(
-                Arguments.of(List.of('>'), 2),
-                Arguments.of(List.of('^', '>', 'v', '<'), 4),
-                Arguments.of(List.of('^', 'v', '^', 'v', '^', 'v', '^', 'v', '^', 'v'), 2)
+                Arguments.of(">", 2),
+                Arguments.of("^>v<", 4),
+                Arguments.of("^v^v^v^v^v", 2)
         );
     }
 
     private static Stream<Arguments> deliverWithRoboArgs() {
         return Stream.of(
-                Arguments.of(List.of('^', 'v'), 3),
-                Arguments.of(List.of('^', '>', 'v', '<'), 3),
-                Arguments.of(List.of('^', 'v', '^', 'v', '^', 'v', '^', 'v', '^', 'v'), 11)
+                Arguments.of("^v", 3),
+                Arguments.of("^>v<", 3),
+                Arguments.of("^v^v^v^v^v", 11)
         );
     }
 

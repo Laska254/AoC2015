@@ -2,19 +2,18 @@ package com.adventofcode.day03;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Day03 {
 
-    public int deliver(final List<Character> instructions, final int workers) {
+    public int deliver(final String instructions, final int workers) {
         final var visitedHouses = new HashMap<Coordinates, Integer>();
         final var positions = new Coordinates[workers];
         Arrays.fill(positions, new Coordinates(0, 0));
         visit(visitedHouses, positions[0]);
-        for (int i = 0; i < instructions.size(); i++) {
+        for (int i = 0; i < instructions.length(); i++) {
             final int idx = i % workers;
-            positions[idx] = move(positions[idx], instructions.get(i));
+            positions[idx] = move(positions[idx], instructions.charAt(i));
             visit(visitedHouses, positions[idx]);
         }
         return visitedHouses.size();
