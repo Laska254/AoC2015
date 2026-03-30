@@ -4,9 +4,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Day04 {
-    private final String secretKey = "yzbqklnj";
 
-    private String calculateMD5(String input) {
+    private String calculateMD5(final String input) {
         try {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
             byte[] bytes = md5.digest(input.getBytes());
@@ -20,7 +19,7 @@ public class Day04 {
         }
     }
 
-    public int findLowestPossibleNumber(String requirement) {
+    public int findLowestPossibleNumber(final String secretKey, final String requirement) {
         for (int number = 1; ; number++) {
             String hash = calculateMD5(secretKey + number);
             if (hash.startsWith(requirement)) {
@@ -28,4 +27,5 @@ public class Day04 {
             }
         }
     }
+
 }

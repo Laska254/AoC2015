@@ -94,8 +94,9 @@ public class Main {
 
     private static void day04() {
         Day04 day04 = new Day04();
-        System.out.println("Day 4, part I result: " + day04.findLowestPossibleNumber("00000"));
-        System.out.println("Day 4, part II result: " + day04.findLowestPossibleNumber("000000"));
+        String secretKey = "yzbqklnj";
+        System.out.println("Day 4, part I result: " + day04.findLowestPossibleNumber(secretKey, "00000"));
+        System.out.println("Day 4, part II result: " + day04.findLowestPossibleNumber(secretKey, "000000"));
     }
 
     private static void day05() {
