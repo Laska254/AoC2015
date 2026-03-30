@@ -25,8 +25,8 @@ class Day02Test {
      square feet of wrapping paper plus 1 square foot of slack, for a total of 43 square feet.*/
     @ParameterizedTest
     @MethodSource("squareFeetExamples")
-    void calculateSquareFeet_shouldCorrectlyCalculate(int length, int width, int height, int expected) {
-        assertEquals(expected, day02.calculateSquareFeet(List.of(length, width, height)));
+    void calculateSquareFeet_shouldCorrectlyCalculate(List<Integer> input, int expected) {
+        assertEquals(expected, day02.calculateSquareFeet(input));
     }
 
     /* A present with dimensions `2x3x4` requires `2+2+3+3 = 10` feet of ribbon
@@ -35,8 +35,8 @@ class Day02Test {
      to wrap the present plus `1*1*10 = 10` feet of ribbon for the bow, for a total of 14 feet. */
     @ParameterizedTest()
     @MethodSource("lengthExamples")
-    void calculateLength_shouldCorrectlyCalculate(int length, int width, int height, int expected) {
-        assertEquals(expected, day02.calculateSquareFeet(List.of(length, width, height)));
+    void calculateLength_shouldCorrectlyCalculate(List<Integer> input, int expected) {
+        assertEquals(expected, day02.calculateLength(input));
     }
 
     private static Stream<Arguments> squareFeetExamples() {
