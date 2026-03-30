@@ -2,9 +2,11 @@ package com.adventofcode.day02;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,10 +24,7 @@ class Day02Test {
      A present with dimensions `1x1x10` requires `2*1 + 2*10 + 2*10 = 42`
      square feet of wrapping paper plus 1 square foot of slack, for a total of 43 square feet.*/
     @ParameterizedTest
-    @CsvSource({
-            "2,3,4,58",
-            "1,1,10,43"
-    })
+    @MethodSource("squareFeetExamples")
     void calculateSquareFeet_shouldCorrectlyCalculate(int length, int width, int height, int expected) {
         assertEquals(expected, day02.calculateSquareFeet(List.of(length, width, height)));
     }
@@ -35,12 +34,23 @@ class Day02Test {
      A present with dimensions `1x1x10` requires `1+1+1+1 = 4` feet of ribbon
      to wrap the present plus `1*1*10 = 10` feet of ribbon for the bow, for a total of 14 feet. */
     @ParameterizedTest()
-    @CsvSource({
-            "2, 3, 4,  34",
-            "1, 1, 10, 14"
-    })
+    @MethodSource("lengthExamples")
     void calculateLength_shouldCorrectlyCalculate(int length, int width, int height, int expected) {
         assertEquals(expected, day02.calculateSquareFeet(List.of(length, width, height)));
+    }
+
+    private static Stream<Arguments> squareFeetExamples() {
+        return Stream.of(
+                Arguments.of(List.of(2, 3, 4), 58),
+                Arguments.of(List.of(1, 1, 10), 43)
+        );
+    }
+
+    private static Stream<Arguments> lengthExamples() {
+        return Stream.of(
+                Arguments.of(List.of(2, 3, 4), 34),
+                Arguments.of(List.of(1, 1, 10), 14)
+        );
     }
 
 }
