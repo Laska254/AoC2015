@@ -1,9 +1,15 @@
 package com.adventofcode.day06;
 
 public enum Command {
-    TURN_ON,
-    TURN_OFF,
-    TOGGLE;
+    TURN_ON("turn on"),
+    TURN_OFF("turn off"),
+    TOGGLE("toggle");
+
+    private final String label;
+
+    Command(final String label) {
+        this.label = label;
+    }
 
     public Light apply(final Light light) {
         return switch (this) {
@@ -13,13 +19,13 @@ public enum Command {
         };
     }
 
-    public static Command fromString(String command) {
-        return switch (command) {
-            case "turn on" -> TURN_ON;
-            case "turn off" -> TURN_OFF;
-            case "toggle" -> TOGGLE;
-            default -> throw new IllegalArgumentException("Unknown command: " + command);
-        };
+    public static Command fromString(final String input) {
+        for (Command command : values()) {
+            if (command.label.equals(input)) {
+                return command;
+            }
+        }
+        throw new IllegalArgumentException("Unknown command: " + input);
     }
 
 }
