@@ -10,8 +10,8 @@ import java.util.Map;
 public class Day06 {
     private final Map<Coordinates, Light> lights = new HashMap<>();
 
-    public void run(List<String> list) {
-        List<Instruction> instructions = new ArrayList<>();
+    public void run(final List<String> list) {
+        final var instructions = new ArrayList<Instruction>();
         list.stream()
                 .map(Instruction::fromString)
                 .forEach(instructions::add);
@@ -37,17 +37,17 @@ public class Day06 {
                 .sum();
     }
 
-    private void doInstruction(Instruction instruction) {
+    private void doInstruction(final Instruction instruction) {
         for (int i = instruction.start().x(); i <= instruction.end().x(); i++) {
             for (int j = instruction.start().y(); j <= instruction.end().y(); j++) {
-                Coordinates coords = new Coordinates(i, j);
-                Light light = lights.get(coords);
+                final var coords = new Coordinates(i, j);
+                var light = lights.get(coords);
                 light = switch (instruction.command()) {
                     case "turn on" -> light
                             .withState(true)
                             .withBrightness(light.brightness() + 1);
                     case "turn off" -> {
-                        int newBrightness = light.brightness() - 1;
+                        final var newBrightness = light.brightness() - 1;
                         yield light.withState(false)
                                 .withBrightness(Math.max(newBrightness, 0));
                     }
@@ -59,4 +59,5 @@ public class Day06 {
             }
         }
     }
+
 }
