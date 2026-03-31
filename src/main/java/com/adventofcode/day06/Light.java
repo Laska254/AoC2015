@@ -10,7 +10,4 @@ public record Light(boolean state, int brightness) {
         return new Light(state, brightness);
     }
 
-    public Light withBrightness(int brightness) {
-        return new Light(state, brightness);
-    }
 }

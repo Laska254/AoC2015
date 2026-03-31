@@ -6,20 +6,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class Day06 {
-    private final Map<Coordinates, Light> lights = new HashMap<>();
+    private final static int SIZE = 1000;
 
-    public void run(List<String> list) {
-        List<Instruction> instructions = new ArrayList<>();
-        list.stream()
-                .map(Instruction::fromString)
-                .forEach(instructions::add);
-        for (int i = 0; i < 1000; i++) {
-            for (int j = 0; j < 1000; j++) {
+    private final Map<Coordinates, Light> lights;
+
+    public Day06() {
+        lights = new HashMap<>();
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
                 lights.put(new Coordinates(i, j), new Light());
             }
         }
+    }
+
+    public void run(final List<String> list) {
+        final var instructions = new ArrayList<Instruction>();
+        list.stream()
+                .map(Instruction::fromString)
+                .forEach(instructions::add);
         instructions.forEach(this::doInstruction);
     }
 
@@ -37,26 +44,14 @@ public class Day06 {
                 .sum();
     }
 
-    private void doInstruction(Instruction instruction) {
-        for (int i = instruction.start().x(); i <= instruction.end().x(); i++) {
-            for (int j = instruction.start().y(); j <= instruction.end().y(); j++) {
-                Coordinates coords = new Coordinates(i, j);
-                Light light = lights.get(coords);
-                light = switch (instruction.command()) {
-                    case "turn on" -> light
-                            .withState(true)
-                            .withBrightness(light.brightness() + 1);
-                    case "turn off" -> {
-                        int newBrightness = light.brightness() - 1;
-                        yield light.withState(false)
-                                .withBrightness(Math.max(newBrightness, 0));
-                    }
-                    default -> light
-                            .withState(!light.state())
-                            .withBrightness(light.brightness() + 2);
-                };
-                lights.put(coords, light);
-            }
-        }
+    public void doInstruction(final Instruction instruction) {
+        IntStream.rangeClosed(instruction.start().x(), instruction.end().x())
+                .forEach(i -> IntStream.rangeClosed(instruction.start().y(), instruction.end().y())
+                        .forEach(j -> {
+                            final var coords = new Coordinates(i, j);
+                            final var light = instruction.command().apply(lights.get(coords));
+                            lights.put(coords, light);
+                        }));
     }
+
 }
