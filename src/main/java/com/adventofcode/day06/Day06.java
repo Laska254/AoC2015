@@ -8,18 +8,24 @@ import java.util.List;
 import java.util.Map;
 
 public class Day06 {
-    private final Map<Coordinates, Light> lights = new HashMap<>();
+    private final static int SIZE = 1000;
+
+    private final Map<Coordinates, Light> lights;
+
+    public Day06() {
+        lights = new HashMap<>();
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                lights.put(new Coordinates(i, j), new Light());
+            }
+        }
+    }
 
     public void run(final List<String> list) {
         final var instructions = new ArrayList<Instruction>();
         list.stream()
                 .map(Instruction::fromString)
                 .forEach(instructions::add);
-        for (int i = 0; i < 1000; i++) {
-            for (int j = 0; j < 1000; j++) {
-                lights.put(new Coordinates(i, j), new Light());
-            }
-        }
         instructions.forEach(this::doInstruction);
     }
 

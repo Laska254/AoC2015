@@ -3,8 +3,6 @@ package com.adventofcode.day06;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day06Test {
@@ -14,9 +12,7 @@ class Day06Test {
     @BeforeEach
     void setUp() {
         day06 = new Day06();
-        day06.run(Collections.emptyList());
     }
-
 
     @Test
     void howManyLightsAreLit() {
