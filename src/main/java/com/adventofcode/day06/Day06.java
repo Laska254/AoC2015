@@ -47,20 +47,7 @@ public class Day06 {
         for (int i = instruction.start().x(); i <= instruction.end().x(); i++) {
             for (int j = instruction.start().y(); j <= instruction.end().y(); j++) {
                 final var coords = new Coordinates(i, j);
-                var light = lights.get(coords);
-                light = switch (instruction.command()) {
-                    case "turn on" -> light
-                            .withState(true)
-                            .withBrightness(light.brightness() + 1);
-                    case "turn off" -> {
-                        final var newBrightness = light.brightness() - 1;
-                        yield light.withState(false)
-                                .withBrightness(Math.max(newBrightness, 0));
-                    }
-                    default -> light
-                            .withState(!light.state())
-                            .withBrightness(light.brightness() + 2);
-                };
+                final var light = instruction.command().apply(lights.get(coords));
                 lights.put(coords, light);
             }
         }
