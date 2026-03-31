@@ -37,7 +37,7 @@ public class Day06 {
                 .sum();
     }
 
-    private void doInstruction(final Instruction instruction) {
+    public void doInstruction(final Instruction instruction) {
         for (int i = instruction.start().x(); i <= instruction.end().x(); i++) {
             for (int j = instruction.start().y(); j <= instruction.end().y(); j++) {
                 final var coords = new Coordinates(i, j);
