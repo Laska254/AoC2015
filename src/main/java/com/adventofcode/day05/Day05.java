@@ -22,7 +22,7 @@ public class Day05 {
                 .count();
     }
 
-    private boolean isNice(final String word, final CheckingMethod method) {
+    public boolean isNice(final String word, final CheckingMethod method) {
         return RULES.getOrDefault(method, List.of())
                 .stream()
                 .allMatch(pattern -> pattern.matches(word));
