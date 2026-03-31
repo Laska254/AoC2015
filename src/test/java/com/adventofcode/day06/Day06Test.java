@@ -35,7 +35,15 @@ class Day06Test {
 
     @Test
     void totalBrightness() {
+        // turn on 0,0 through 0,0 would increase the total brightness by 1.
+        var expected = 1;
+        day06.doInstruction(Instruction.fromString("turn on 0,0 through 0,0"));
+        assertEquals(expected, day06.totalBrightness());
 
+        // toggle 0,0 through 999,999 would increase the total brightness by 2000000.
+        expected = expected + 2000000;
+        day06.doInstruction(Instruction.fromString("toggle 0,0 through 999,999"));
+        assertEquals(expected, day06.totalBrightness());
     }
 
 }
