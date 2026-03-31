@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class Day06 {
     private final static int SIZE = 1000;
@@ -44,13 +45,13 @@ public class Day06 {
     }
 
     public void doInstruction(final Instruction instruction) {
-        for (int i = instruction.start().x(); i <= instruction.end().x(); i++) {
-            for (int j = instruction.start().y(); j <= instruction.end().y(); j++) {
-                final var coords = new Coordinates(i, j);
-                final var light = instruction.command().apply(lights.get(coords));
-                lights.put(coords, light);
-            }
-        }
+        IntStream.rangeClosed(instruction.start().x(), instruction.end().x())
+                .forEach(i -> IntStream.rangeClosed(instruction.start().y(), instruction.end().y())
+                        .forEach(j -> {
+                            final var coords = new Coordinates(i, j);
+                            final var light = instruction.command().apply(lights.get(coords));
+                            lights.put(coords, light);
+                        }));
     }
 
 }
