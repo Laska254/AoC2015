@@ -23,10 +23,6 @@ import com.adventofcode.day20.Day20;
 import com.adventofcode.day21.Day21;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -71,7 +67,7 @@ public class Main {
     private static void day01() {
         File file = new File("src/main/resources/inputs/day01.txt");
         Day01 day01 = new Day01();
-        List<Character> input = inputAsListOfCharacters(file);
+        List<Character> input = InputProvider.inputAsListOfCharacters(file);
         System.out.println("Day 1, part I result: " + day01.calculateFloor(input));
         System.out.println("Day 1, part II result: " + day01.findPositionOfBasementEnter(input));
     }
@@ -79,7 +75,7 @@ public class Main {
     private static void day02() {
         File file = new File("src/main/resources/inputs/day02.txt");
         Day02 day02 = new Day02();
-        List<List<Integer>> input = inputAsListOfListsOfDimensions(file);
+        List<List<Integer>> input = InputProvider.inputAsListOfListsOfDimensions(file);
         System.out.println("Day 2, part I result: " + day02.getTotalSquareFeet(input));
         System.out.println("Day 2, part II result: " + day02.getTotalLength(input));
     }
@@ -87,7 +83,7 @@ public class Main {
     private static void day03() {
         File file = new File("src/main/resources/inputs/day03.txt");
         Day03 day03 = new Day03();
-        String input = inputAsString(file);
+        String input = InputProvider.inputAsString(file);
         System.out.println("Day 3, part I result: " + day03.deliver(input, 1));
         System.out.println("Day 3, part II result: " + day03.deliver(input, 2));
     }
@@ -102,14 +98,14 @@ public class Main {
     private static void day05() {
         Day05 day05 = new Day05();
         File file = new File("src/main/resources/inputs/day05.txt");
-        List<String> input = inputAsListOfStrings(file);
+        List<String> input = InputProvider.inputAsListOfStrings(file);
         System.out.println("Day 5, part I result: " + day05.howManyStringsAreNice(input, CheckingMethod.STANDARD));
         System.out.println("Day 5, part II result: " + day05.howManyStringsAreNice(input, CheckingMethod.BETTER));
     }
 
     private static void day06() {
         File file = new File("src/main/resources/inputs/day06.txt");
-        List<String> input = inputAsListOfStrings(file);
+        List<String> input = InputProvider.inputAsListOfStrings(file);
         Day06 day06 = new Day06();
         day06.run(input);
         System.out.println("Day 6, part I result: " + day06.howManyLightsAreLit());
@@ -119,7 +115,7 @@ public class Main {
     private static void day07() {
         Day07 day07 = new Day07();
         File file = new File("src/main/resources/inputs/day07.txt");
-        List<String> input = inputAsListOfStrings(file);
+        List<String> input = InputProvider.inputAsListOfStrings(file);
         System.out.println("Day 7, part I result: " + day07.run(input));
         System.out.println("Day 7, part II result: " + day07.runPart2(input));
     }
@@ -127,14 +123,14 @@ public class Main {
     private static void day08() {
         Day08 day08 = new Day08();
         File file = new File("src/main/resources/inputs/day08.txt");
-        List<String> input = inputAsListOfStrings(file);
+        List<String> input = InputProvider.inputAsListOfStrings(file);
         System.out.println("Day 5, part I result: " + day08.calculate(input));
         System.out.println("Day 5, part II result: " + day08.calculateEncoded(input));
     }
 
     private static void day09() {
         File file = new File("src/main/resources/inputs/day09.txt");
-        List<String> input = inputAsListOfStrings(file);
+        List<String> input = InputProvider.inputAsListOfStrings(file);
         Day09 day09 = new Day09();
         System.out.println("Day 9, part I result: " + day09.getResultDistance(input, SearchType.SHORTEST));
         System.out.println(day09.getResultRoute(SearchType.SHORTEST));
@@ -165,14 +161,14 @@ public class Main {
 
     private static void day15() {
         File file = new File("src/main/resources/inputs/day15.txt");
-        List<String> input = inputAsListOfStrings(file);
+        List<String> input = InputProvider.inputAsListOfStrings(file);
         Day15 day15 = new Day15(input);
         System.out.println(day15.run());
     }
 
     private static void day16() {
         File file = new File("src/main/resources/inputs/day16.txt");
-        List<String> input = inputAsListOfStrings(file);
+        List<String> input = InputProvider.inputAsListOfStrings(file);
         Map<String, Integer> tickerTape = Map.ofEntries(
                 Map.entry("children", 3),
                 Map.entry("cats", 7),
@@ -191,7 +187,7 @@ public class Main {
 
     private static void day17() {
         File file = new File("src/main/resources/inputs/day17.txt");
-        List<Integer> input = inputAsListOfIntegers(file);
+        List<Integer> input = InputProvider.inputAsListOfIntegers(file);
         Day17 day17 = new Day17(input, 150);
         day17.run();
         System.out.println("Day 17, part I & II results: " + day17);
@@ -206,7 +202,7 @@ public class Main {
 
     private static void day18() {
         File file = new File("src/main/resources/inputs/day18.txt");
-        List<String> input = inputAsListOfStrings(file);
+        List<String> input = InputProvider.inputAsListOfStrings(file);
         Day18 day18 = new Day18(input, 100);
         System.out.println("Day 18, part I results: " + day18.solvePartI());
         System.out.println("Day 18, part II results: " + day18.solvePartII());
@@ -214,7 +210,7 @@ public class Main {
 
     private static void day19() {
         File file = new File("src/main/resources/inputs/day19.txt");
-        List<String> input = inputAsListOfStrings(file);
+        List<String> input = InputProvider.inputAsListOfStrings(file);
         Day19 day19 = new Day19(input);
         System.out.println("Day 19, part I results: " + day19.checkAndReplace());
     }
@@ -225,55 +221,4 @@ public class Main {
         System.out.println("Day 21, part I result: " + minCostToWin);
     }
 
-    private static String inputAsString(File file) {
-        try {
-            return Files.readString(file.toPath()).trim();
-        } catch (IOException exception) {
-            throw new RuntimeException("File not found: " + file.getAbsolutePath(), exception);
-        }
-    }
-
-    private static List<Character> inputAsListOfCharacters(File file) {
-        try {
-            Scanner scanner = new Scanner(file);
-            return scanner.next()
-                    .chars()
-                    .mapToObj(c -> (char) c)
-                    .toList();
-        } catch (FileNotFoundException exception) {
-            throw new RuntimeException("File not found: " + file.getAbsolutePath(), exception);
-        }
-    }
-
-    private static List<List<Integer>> inputAsListOfListsOfDimensions(File file) {
-        try {
-            Scanner scanner = new Scanner(file);
-            return scanner.tokens()
-                    .map(line -> Arrays.stream(line.split("x"))
-                            .map(Integer::parseInt)
-                            .toList())
-                    .toList();
-        } catch (FileNotFoundException exception) {
-            throw new RuntimeException("File not found: " + file.getAbsolutePath(), exception);
-        }
-    }
-
-    private static List<String> inputAsListOfStrings(File file) {
-        try {
-            return Files.readAllLines(file.toPath());
-        } catch (IOException exception) {
-            throw new RuntimeException("File not found: " + file.getAbsolutePath(), exception);
-        }
-    }
-
-    private static List<Integer> inputAsListOfIntegers(File file) {
-        try {
-            return Files.readAllLines(file.toPath())
-                    .stream()
-                    .map(Integer::parseInt)
-                    .toList();
-        } catch (IOException exception) {
-            throw new RuntimeException("File not found: " + file.getAbsolutePath(), exception);
-        }
-    }
 }
