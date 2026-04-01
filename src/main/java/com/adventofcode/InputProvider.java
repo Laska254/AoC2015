@@ -10,10 +10,7 @@ import java.util.Scanner;
 
 public class InputProvider {
 
-    private InputProvider() {
-    }
-
-    public static String inputAsString(File file) {
+    public String inputAsString(final File file) {
         try {
             return Files.readString(file.toPath()).trim();
         } catch (IOException exception) {
@@ -21,7 +18,7 @@ public class InputProvider {
         }
     }
 
-    public static List<Character> inputAsListOfCharacters(File file) {
+    public List<Character> inputAsListOfCharacters(final File file) {
         try {
             Scanner scanner = new Scanner(file);
             return scanner.next()
@@ -33,7 +30,7 @@ public class InputProvider {
         }
     }
 
-    public static List<List<Integer>> inputAsListOfListsOfDimensions(File file) {
+    public List<List<Integer>> inputAsListOfListsOfDimensions(final File file) {
         try {
             Scanner scanner = new Scanner(file);
             return scanner.tokens()
@@ -46,7 +43,7 @@ public class InputProvider {
         }
     }
 
-    public static List<String> inputAsListOfStrings(File file) {
+    public List<String> inputAsListOfStrings(final File file) {
         try {
             return Files.readAllLines(file.toPath());
         } catch (IOException exception) {
@@ -54,7 +51,7 @@ public class InputProvider {
         }
     }
 
-    public static List<Integer> inputAsListOfIntegers(File file) {
+    public List<Integer> inputAsListOfIntegers(final File file) {
         try {
             return Files.readAllLines(file.toPath())
                     .stream()
