@@ -3,7 +3,7 @@ package com.adventofcode.runner;
 import com.adventofcode.InputProvider;
 import com.adventofcode.day16.Day16;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -11,8 +11,8 @@ public class Day16Runner implements Consumer<InputProvider> {
 
     @Override
     public void accept(final InputProvider provider) {
-        final var file = new File("src/main/resources/inputs/day16.txt");
-        final var input = provider.inputAsListOfStrings(file);
+        final var filepath = Path.of("src/main/resources/inputs/day16.txt");
+        final var input = provider.inputAsListOfStrings(filepath);
         final var tickerTape = Map.ofEntries(
                 Map.entry("children", 3),
                 Map.entry("cats", 7),

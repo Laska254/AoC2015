@@ -11,7 +11,7 @@ public class Day11Runner implements Consumer<InputProvider> {
     public void accept(final InputProvider provider) {
         final var input = "hepxcrrq";
         final var day = new Day11();
-        String password = day.generateNewPassword(input);
+        final var password = day.generateNewPassword(input);
         System.out.println("Day 11, part I result: " + password);
         System.out.println("Day 11, part II result: " + day.generateNewPassword(password));
     }

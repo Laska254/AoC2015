@@ -1,65 +1,54 @@
 package com.adventofcode;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class InputProvider {
 
-    public String inputAsString(final File file) {
+    public String inputAsString(final Path path) {
         try {
-            return Files.readString(file.toPath()).trim();
+            return Files.readString(path).trim();
         } catch (IOException exception) {
-            throw new RuntimeException("File not found: " + file.getAbsolutePath(), exception);
+            throw new UncheckedIOException("Failed to read file: " + path, exception);
         }
     }
 
-    public List<Character> inputAsListOfCharacters(final File file) {
-        try {
-            Scanner scanner = new Scanner(file);
-            return scanner.next()
-                    .chars()
-                    .mapToObj(c -> (char) c)
-                    .toList();
-        } catch (FileNotFoundException exception) {
-            throw new RuntimeException("File not found: " + file.getAbsolutePath(), exception);
-        }
+    public List<Character> inputAsListOfCharacters(final Path path) {
+        return inputAsString(path)
+                .chars()
+                .mapToObj(c -> (char) c)
+                .toList();
     }
 
-    public List<List<Integer>> inputAsListOfListsOfDimensions(final File file) {
+    public List<List<Integer>> inputAsListOfListsOfDimensions(final Path path) {
         try {
-            Scanner scanner = new Scanner(file);
-            return scanner.tokens()
+            return Files.lines(path)
                     .map(line -> Arrays.stream(line.split("x"))
                             .map(Integer::parseInt)
                             .toList())
                     .toList();
-        } catch (FileNotFoundException exception) {
-            throw new RuntimeException("File not found: " + file.getAbsolutePath(), exception);
+        } catch (IOException e) {
+            throw new UncheckedIOException("Failed to read file: " + path, e);
         }
     }
 
-    public List<String> inputAsListOfStrings(final File file) {
+    public List<String> inputAsListOfStrings(final Path path) {
         try {
-            return Files.readAllLines(file.toPath());
-        } catch (IOException exception) {
-            throw new RuntimeException("File not found: " + file.getAbsolutePath(), exception);
+            return Files.readAllLines(path);
+        } catch (IOException e) {
+            throw new UncheckedIOException("Failed to read file: " + path, e);
         }
     }
 
-    public List<Integer> inputAsListOfIntegers(final File file) {
-        try {
-            return Files.readAllLines(file.toPath())
-                    .stream()
-                    .map(Integer::parseInt)
-                    .toList();
-        } catch (IOException exception) {
-            throw new RuntimeException("File not found: " + file.getAbsolutePath(), exception);
-        }
+    public List<Integer> inputAsListOfIntegers(final Path path) {
+        return inputAsListOfStrings(path)
+                .stream()
+                .map(Integer::parseInt)
+                .toList();
     }
 
 }
