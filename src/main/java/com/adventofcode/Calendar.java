@@ -22,7 +22,6 @@ import com.adventofcode.runner.Day21Runner;
 
 import java.nio.file.ProviderNotFoundException;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Consumer;
 
 public final class Calendar {
@@ -50,8 +49,11 @@ public final class Calendar {
     );
 
     public static Consumer<InputProvider> getRunner(int dayNumber) {
-        return Optional.ofNullable(RUNNERS.get(dayNumber))
-                .orElseThrow(() -> new ProviderNotFoundException("Day " + dayNumber + " not implemented."));
+        final var provider = RUNNERS.get(dayNumber);
+        if (provider == null) {
+            throw new ProviderNotFoundException("Day " + dayNumber + " not implemented.");
+        }
+        return provider;
     }
 
 }
