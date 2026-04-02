@@ -20,8 +20,9 @@ import com.adventofcode.runner.Day19Runner;
 import com.adventofcode.runner.Day20Runner;
 import com.adventofcode.runner.Day21Runner;
 
+import java.nio.file.ProviderNotFoundException;
 import java.util.Map;
-import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public final class Calendar {
@@ -49,9 +50,8 @@ public final class Calendar {
     );
 
     public static Consumer<InputProvider> getRunner(int dayNumber) {
-        final var runner = RUNNERS.get(dayNumber);
-        Objects.requireNonNull(runner, "No runner for day " + dayNumber);
-        return runner;
+        return Optional.ofNullable(RUNNERS.get(dayNumber))
+                .orElseThrow(() -> new ProviderNotFoundException("Day " + dayNumber + " not implemented."));
     }
 
 }
