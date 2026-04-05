@@ -6,31 +6,32 @@ import java.util.List;
 import java.util.Map;
 
 public class Day07 {
+
     private final Map<String, Character> wires = new HashMap<>();
 
-    public int run(List<String> input) {
-        LinkedList<String> instructions = new LinkedList<>(input);
+    public int run(final List<String> input) {
+        final var instructions = new LinkedList<>(input);
         while (!instructions.isEmpty()) {
             instructions.removeIf(this::doCommand);
         }
         return wires.get("a");
     }
 
-    public int runPart2(List<String> input) {
-        char value = wires.get("a");
+    public int runPart2(final List<String> input) {
+        final var value = wires.get("a");
         wires.clear();
         wires.put("b", value);
-        LinkedList<String> instructions = new LinkedList<>(input);
+        final var instructions = new LinkedList<>(input);
         instructions.removeIf(line -> isToRemove(line.split(" ")));
         return run(instructions);
     }
 
-    private boolean isToRemove(String[] split) {
+    private boolean isToRemove(final String[] split) {
         return split.length == 3 && split[2].matches("b");
     }
 
-    private boolean doCommand(String line) {
-        String[] split = line.split(" ");
+    private boolean doCommand(final String line) {
+        final var split = line.split(" ");
         if (split.length == 3) {
             return handleProvidedValue(split);
         }
@@ -46,7 +47,7 @@ public class Day07 {
         return false;
     }
 
-    private boolean updateWireIfValid(String key, char value) {
+    private boolean updateWireIfValid(final String key, final char value) {
         if (!key.isBlank() && value != ' ') {
             wires.put(key, value);
             return true;
@@ -54,11 +55,11 @@ public class Day07 {
         return false;
     }
 
-    private boolean handleProvidedValue(String[] split) {
+    private boolean handleProvidedValue(final String[] split) {
         return updateWireIfValid(split[2], getValue(split));
     }
 
-    private char getValue(String[] split) {
+    private char getValue(final String[] split) {
         if (split[0].matches("\\d+")) {
             return (char) Integer.parseInt(split[0]);
         }
@@ -68,16 +69,16 @@ public class Day07 {
         return ' ';
     }
 
-    private boolean handleNot(String line) {
+    private boolean handleNot(final String line) {
         String[] split = line.split(" ");
         return updateWireIfValid(split[3], (char) ~wires.get(split[1]));
     }
 
-    private boolean handleAndOr(String[] split) {
+    private boolean handleAndOr(final String[] split) {
         return updateWireIfValid(split[4], getValue2(split));
     }
 
-    private char getValue2(String[] split) {
+    private char getValue2(final String[] split) {
         if (wires.containsKey(split[0]) && wires.containsKey(split[2])) {
             return switch (split[1]) {
                 case "AND" -> (char) (wires.get(split[0]) & wires.get(split[2]));
@@ -91,11 +92,11 @@ public class Day07 {
         return ' ';
     }
 
-    private boolean handleShift(String[] split) {
+    private boolean handleShift(final String[] split) {
         return updateWireIfValid(split[4], getValue3(split));
     }
 
-    private char getValue3(String[] split) {
+    private char getValue3(final String[] split) {
         if (!wires.containsKey(split[0])) {
             return ' ';
         }
@@ -106,4 +107,5 @@ public class Day07 {
             default -> throw new IllegalStateException("Unexpected value: " + split[1]);
         };
     }
+    
 }
