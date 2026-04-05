@@ -1,5 +1,7 @@
 package com.adventofcode.day07;
 
+import com.adventofcode.day07.instruction.Parser;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.Map;
 public class Day07 {
 
     private final Map<String, Character> wires = new HashMap<>();
+    private final Parser parser = new Parser();
 
     public int partI(final List<String> input) {
         simulate(input);
@@ -45,7 +48,7 @@ public class Day07 {
     private boolean doCommand(final String line) {
         final var split = line.split(" ");
         if (split.length == 3) {
-            return handleProvidedValue(split);
+            return parser.parse(line).execute(wires);
         }
         if (line.contains("NOT") && wires.containsKey(split[1])) {
             return handleNot(line);
@@ -65,20 +68,6 @@ public class Day07 {
             return true;
         }
         return false;
-    }
-
-    private boolean handleProvidedValue(final String[] split) {
-        return updateWireIfValid(split[2], getValue(split));
-    }
-
-    private char getValue(final String[] split) {
-        if (split[0].matches("\\d+")) {
-            return (char) Integer.parseInt(split[0]);
-        }
-        if (wires.containsKey(split[0])) {
-            return wires.get(split[0]);
-        }
-        return ' ';
     }
 
     private boolean handleNot(final String line) {
