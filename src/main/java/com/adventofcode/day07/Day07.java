@@ -50,8 +50,8 @@ public class Day07 {
         if (split.length == 3) {
             return parser.parse(line).execute(wires);
         }
-        if (line.contains("NOT") && wires.containsKey(split[1])) {
-            return handleNot(line);
+        if (line.contains("NOT")) {
+            return parser.parse(line).execute(wires);
         }
         if (line.contains("AND") || line.contains("OR")) {
             return handleAndOr(split);
@@ -68,11 +68,6 @@ public class Day07 {
             return true;
         }
         return false;
-    }
-
-    private boolean handleNot(final String line) {
-        String[] split = line.split(" ");
-        return updateWireIfValid(split[3], (char) ~wires.get(split[1]));
     }
 
     private boolean handleAndOr(final String[] split) {
