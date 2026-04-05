@@ -16,7 +16,7 @@ public class Day09 {
 
     public int getResultDistance(List<String> inputList, SearchType searchType) {
         inputList.forEach(line -> {
-            String[] split = line.split(SEPARATOR);
+            final var split = line.split(SEPARATOR);
             graph.computeIfAbsent(split[0], k -> new HashMap<>())
                     .put(split[1], Integer.parseInt(split[2]));
             graph.computeIfAbsent(split[1], k -> new HashMap<>())
@@ -27,8 +27,8 @@ public class Day09 {
             resultDistance = Integer.MAX_VALUE;
         }
         for (String city : cities) {
-            List<String> path = new ArrayList<>();
-            Set<String> visited = new HashSet<>();
+            final var path = new ArrayList<String>();
+            final var visited = new HashSet<String>();
             path.add(city);
             visited.add(city);
             findRoute(path, visited, 0, searchType);
@@ -45,12 +45,11 @@ public class Day09 {
             }
             return;
         }
-        String city = path.getLast();
-        Map<String, Integer> neighbors = graph.get(city);
+        final var city = path.getLast();
+        final var neighbors = graph.get(city);
         if (neighbors == null) {
             return;
         }
-
         for (String neighbor : neighbors.keySet()) {
             if (!visited.contains(neighbor)) {
                 path.add(neighbor);
@@ -63,16 +62,10 @@ public class Day09 {
     }
 
     public String getResultRoute(SearchType searchType) {
-        if (searchType.equals(SearchType.SHORTEST)) {
-            return String.format("Shortest route = %s, shortestDistance = %d",
-                    resultRoute,
-                    resultDistance
-            );
-        } else {
-            return String.format("Longest route = %s, longestDistance = %d",
-                    resultRoute,
-                    resultDistance
-            );
-        }
+        return searchType.equals(SearchType.SHORTEST)
+                ? String.format("Shortest route = %s, shortestDistance = %d", resultRoute, resultDistance)
+                : String.format("Longest route = %s, longestDistance = %d", resultRoute, resultDistance
+        );
     }
+
 }
