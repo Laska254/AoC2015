@@ -57,33 +57,9 @@ public class Day07 {
             return parser.parse(line).execute(wires);
         }
         if (line.contains("SHIFT")) {
-            return handleShift(split);
+            return parser.parse(line).execute(wires);
         }
         return false;
-    }
-
-    private boolean updateWireIfValid(final String key, final char value) {
-        if (!key.isBlank() && value != ' ') {
-            wires.put(key, value);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean handleShift(final String[] split) {
-        return updateWireIfValid(split[4], getValue3(split));
-    }
-
-    private char getValue3(final String[] split) {
-        if (!wires.containsKey(split[0])) {
-            return ' ';
-        }
-        char shiftValue = (char) Integer.parseInt(split[2]);
-        return switch (split[1]) {
-            case "LSHIFT" -> (char) (wires.get(split[0]) << shiftValue);
-            case "RSHIFT" -> (char) (wires.get(split[0]) >> shiftValue);
-            default -> throw new IllegalStateException("Unexpected value: " + split[1]);
-        };
     }
 
 }

@@ -13,6 +13,9 @@ public class Parser {
         if (split.length == 5 && ("AND".equals(split[1]) || "OR".equals(split[1]))) {
             return parseAndOr(split);
         }
+        if (split[1].contains("SHIFT")) {
+            return parseShift(split);
+        }
         throw new IllegalArgumentException("Unknown instruction: " + line);
     }
 
@@ -26,6 +29,10 @@ public class Parser {
 
     private static Instruction parseAndOr(final String[] split) {
         return new AndOr(split[0], split[1], split[2], split[4]);
+    }
+
+    private static Instruction parseShift(final String[] split) {
+        return new Shift(split[0], split[1], Integer.parseInt(split[2]), split[4]);
     }
 
 }
