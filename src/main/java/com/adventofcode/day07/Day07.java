@@ -54,7 +54,7 @@ public class Day07 {
             return parser.parse(line).execute(wires);
         }
         if (line.contains("AND") || line.contains("OR")) {
-            return handleAndOr(split);
+            return parser.parse(line).execute(wires);
         }
         if (line.contains("SHIFT")) {
             return handleShift(split);
@@ -68,24 +68,6 @@ public class Day07 {
             return true;
         }
         return false;
-    }
-
-    private boolean handleAndOr(final String[] split) {
-        return updateWireIfValid(split[4], getValue2(split));
-    }
-
-    private char getValue2(final String[] split) {
-        if (wires.containsKey(split[0]) && wires.containsKey(split[2])) {
-            return switch (split[1]) {
-                case "AND" -> (char) (wires.get(split[0]) & wires.get(split[2]));
-                case "OR" -> (char) (wires.get(split[0]) | wires.get(split[2]));
-                default -> throw new IllegalStateException("Unexpected value: " + split[1]);
-            };
-        }
-        if (split[0].matches("\\d+") && wires.containsKey(split[2])) {
-            return (char) (Short.parseShort(split[0]) & wires.get(split[2]));
-        }
-        return ' ';
     }
 
     private boolean handleShift(final String[] split) {

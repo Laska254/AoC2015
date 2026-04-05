@@ -10,6 +10,9 @@ public class Parser {
         if (split.length == 4 && "NOT".equals(split[0])) {
             return parseNot(split);
         }
+        if (split.length == 5 && ("AND".equals(split[1]) || "OR".equals(split[1]))) {
+            return parseAndOr(split);
+        }
         throw new IllegalArgumentException("Unknown instruction: " + line);
     }
 
@@ -19,6 +22,10 @@ public class Parser {
 
     private static Instruction parseNot(final String[] split) {
         return new Not(split[1], split[3]);
+    }
+
+    private static Instruction parseAndOr(final String[] split) {
+        return new AndOr(split[0], split[1], split[2], split[4]);
     }
 
 }
