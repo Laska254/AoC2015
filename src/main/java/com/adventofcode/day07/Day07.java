@@ -9,21 +9,33 @@ public class Day07 {
 
     private final Map<String, Character> wires = new HashMap<>();
 
-    public int run(final List<String> input) {
+    public int partI(final List<String> input) {
+        simulate(input);
+        return wires.get("a");
+    }
+
+    public int getWire(final String wire) {
+        final Character value = wires.get(wire);
+        if (value == null) {
+            throw new IllegalStateException("Wire '%s' has not been resolved".formatted(wire));
+        }
+        return value;
+    }
+
+    public void simulate(final List<String> input) {
         final var instructions = new LinkedList<>(input);
         while (!instructions.isEmpty()) {
             instructions.removeIf(this::doCommand);
         }
-        return wires.get("a");
     }
 
-    public int runPart2(final List<String> input) {
+    public int partII(final List<String> input) {
         final var value = wires.get("a");
         wires.clear();
         wires.put("b", value);
         final var instructions = new LinkedList<>(input);
         instructions.removeIf(line -> isToRemove(line.split(" ")));
-        return run(instructions);
+        return partI(instructions);
     }
 
     private boolean isToRemove(final String[] split) {
@@ -107,5 +119,5 @@ public class Day07 {
             default -> throw new IllegalStateException("Unexpected value: " + split[1]);
         };
     }
-    
+
 }
