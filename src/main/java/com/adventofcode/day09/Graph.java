@@ -29,10 +29,6 @@ public class Graph {
         return bestRoute;
     }
 
-    public String getResultRoute() {
-        return bestRoute.toString();
-    }
-
     private Route findRoute(final List<String> path,
                             final Set<String> visited,
                             final int distance,
