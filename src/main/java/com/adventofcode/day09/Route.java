@@ -10,6 +10,13 @@ public record Route(List<String> path, int distance) {
                 : 0);
     }
 
+    public Route compete(final List<String> path, final int distance, final SearchType searchType) {
+        final var candidate = new Route(path, distance);
+        return candidate.isBetterThan(this, searchType)
+                ? candidate.withPath(path)
+                : this;
+    }
+
     public boolean isBetterThan(final Route other, final SearchType searchType) {
         return searchType == SearchType.SHORTEST
                 ? this.distance < other.distance
