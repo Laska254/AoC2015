@@ -5,9 +5,7 @@ import java.util.List;
 public record Route(List<String> path, int distance) {
 
     public static Route empty(final SearchType searchType) {
-        return new Route(List.of(), searchType == SearchType.SHORTEST
-                ? Integer.MAX_VALUE
-                : 0);
+        return new Route(List.of(), searchType.getInitDistance());
     }
 
     public Route compete(final List<String> path, final int distance, final SearchType searchType) {
@@ -18,9 +16,7 @@ public record Route(List<String> path, int distance) {
     }
 
     public boolean isBetterThan(final Route other, final SearchType searchType) {
-        return searchType == SearchType.SHORTEST
-                ? this.distance < other.distance
-                : this.distance > other.distance;
+        return searchType.isBetter(this.distance, other.distance);
     }
 
     public Route withPath(final List<String> newPath) {
