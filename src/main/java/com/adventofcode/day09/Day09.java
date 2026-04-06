@@ -8,16 +8,12 @@ public class Day09 {
 
     private final Graph graph = new Graph();
 
-    public int getResultDistance(final List<String> inputList, final SearchType searchType) {
+    public Route getResultDistance(final List<String> inputList, final SearchType searchType) {
         inputList.forEach(line -> {
             final var split = line.split(SEPARATOR);
             graph.addEdge(split[0], split[1], Integer.parseInt(split[2]));
         });
-        return graph.findBestRoute(searchType).distance();
-    }
-
-    public String getResultRoute() {
-        return graph.getResultRoute();
+        return graph.findBestRoute(searchType);
     }
 
 }

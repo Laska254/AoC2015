@@ -15,9 +15,7 @@ public class Day09Runner implements Consumer<InputProvider> {
         final var input = provider.inputAsListOfStrings(filepath);
         final var day = new Day09();
         System.out.println("Day 9, part I result: " + day.getResultDistance(input, SearchType.SHORTEST));
-        System.out.println(day.getResultRoute());
         System.out.println("Day 9, part II result: " + day.getResultDistance(input, SearchType.LONGEST));
-        System.out.println(day.getResultRoute());
     }
 
 }

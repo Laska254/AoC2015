@@ -25,13 +25,13 @@ class Day09Test {
     @Test
     void shouldReturnShortestDistance() {
         final var result = day.getResultDistance(EXAMPLE_INPUT, SearchType.SHORTEST);
-        assertEquals(605, result);
+        assertEquals(605, result.distance());
     }
 
     @Test
     void shouldReturnLongestDistance() {
         final var result = day.getResultDistance(EXAMPLE_INPUT, SearchType.LONGEST);
-        assertEquals(982, result);
+        assertEquals(982, result.distance());
     }
 
 }
