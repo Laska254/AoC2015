@@ -14,7 +14,7 @@ public class Day09 {
     private List<String> resultRoute = new ArrayList<>();
     private int resultDistance = 0;
 
-    public int getResultDistance(List<String> inputList, SearchType searchType) {
+    public int getResultDistance(final List<String> inputList, final SearchType searchType) {
         inputList.forEach(line -> {
             final var split = line.split(SEPARATOR);
             graph.computeIfAbsent(split[0], k -> new HashMap<>())
@@ -36,7 +36,10 @@ public class Day09 {
         return resultDistance;
     }
 
-    private void findRoute(List<String> path, Set<String> visited, int distance, SearchType searchType) {
+    private void findRoute(final List<String> path,
+                           final Set<String> visited,
+                           final int distance,
+                           final SearchType searchType) {
         if (path.size() == cities.size()) {
             if (searchType.equals(SearchType.SHORTEST) && distance < resultDistance ||
                     searchType.equals(SearchType.LONGEST) && distance > resultDistance) {
@@ -61,7 +64,7 @@ public class Day09 {
         }
     }
 
-    public String getResultRoute(SearchType searchType) {
+    public String getResultRoute(final SearchType searchType) {
         return searchType.equals(SearchType.SHORTEST)
                 ? String.format("Shortest route = %s, shortestDistance = %d", resultRoute, resultDistance)
                 : String.format("Longest route = %s, longestDistance = %d", resultRoute, resultDistance
