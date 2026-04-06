@@ -6,28 +6,29 @@ public class Day08 {
 
     private static final String HEXADECIMAL = "\\\\x[0-9a-fA-F]{2}";
 
-    public int calculate(List<String> list) {
+    public int calculate(final List<String> list) {
         return list.stream()
                 .mapToInt(this::replace)
                 .sum();
     }
 
-    public int calculateEncoded(List<String> list) {
+    public int calculateEncoded(final List<String> list) {
         return list.stream()
                 .mapToInt(this::replaceEncoded)
                 .sum();
     }
 
-    private int replace(String word) {
+    private int replace(final String word) {
         return word.length() - word.substring(1, word.length() - 1)
                 .replace("\\\\", "a")
                 .replace("\\\"", "b")
                 .replaceAll(HEXADECIMAL, "c").length();
     }
 
-    private int replaceEncoded(String word) {
+    private int replaceEncoded(final String word) {
         return word.replace("\\", "aa")
                 .replace("\"", "bb")
                 .length() - word.length() + 2;
     }
+
 }
