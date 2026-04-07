@@ -11,8 +11,8 @@ public class Day10Runner implements Consumer<InputProvider> {
     public void accept(final InputProvider provider) {
         final var input = "3113322113";
         final var day = new Day10();
-        System.out.println("Day 10, part I result: " + day.calculate(input, 40));
-        System.out.println("Day 10, part II result: " + day.calculate(input, 50));
+        System.out.println("Day 10, part I result: " + day.lengthAfterIterations(input, 40));
+        System.out.println("Day 10, part II result: " + day.lengthAfterIterations(input, 50));
     }
 
 }

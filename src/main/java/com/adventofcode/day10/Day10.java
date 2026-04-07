@@ -1,30 +1,27 @@
 package com.adventofcode.day10;
 
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class Day10 {
 
-    public int calculate(String original, int n) {
-        return Stream.iterate(original, this::lookAndSay)
-                .limit(n + 1)
+    private static final Pattern PATTERN = Pattern.compile("(.)\\1*");
+
+    public int lengthAfterIterations(final String originalInput, final int iterations) {
+        return Stream.iterate(originalInput, this::lookAndSay)
+                .limit(iterations + 1)
                 .reduce((oldWord, newWord) -> newWord)
-                .orElse(original)
+                .orElse(originalInput)
                 .length();
     }
 
-    private String lookAndSay(String input) {
-        StringBuilder result = new StringBuilder();
-        int counter = 1;
-        for (int i = 0; i < input.length() - 1; i++) {
-            if (input.charAt(i) == input.charAt(i + 1)) {
-                counter++;
-            } else {
-                result.append(counter).append(input.charAt(i));
-                counter = 1;
-            }
-        }
-        return result.append(counter)
-                .append(input.charAt(input.length() - 1))
-                .toString();
+    private String lookAndSay(final String input) {
+        final var result = new StringBuilder();
+        PATTERN.matcher(input).results().forEach(match -> {
+            final var group = match.group();
+            result.append(group.length()).append(group.charAt(0));
+        });
+        return result.toString();
     }
+
 }
