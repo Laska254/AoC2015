@@ -15,7 +15,7 @@ public class Day10 {
                 .length();
     }
 
-    private String lookAndSay(final String input) {
+    public String lookAndSay(final String input) {
         final var result = new StringBuilder();
         PATTERN.matcher(input).results().forEach(match -> {
             final var group = match.group();
