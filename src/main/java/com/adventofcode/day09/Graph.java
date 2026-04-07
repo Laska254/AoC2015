@@ -33,24 +33,25 @@ public class Graph {
                             final Set<String> visited,
                             final int distance,
                             final SearchType searchType,
-                            Route bestRoute) {
+                            final Route bestRoute) {
+        var newBestRoute = bestRoute;
         if (path.size() == graph.size()) {
-            return bestRoute.compete(path, distance, searchType);
+            return newBestRoute.compete(path, distance, searchType);
         }
         final var neighbors = graph.get(path.getLast());
         if (neighbors == null) {
-            return bestRoute;
+            return newBestRoute;
         }
         for (var entry : neighbors.entrySet()) {
             if (!visited.contains(entry.getKey())) {
                 path.add(entry.getKey());
                 visited.add(entry.getKey());
-                bestRoute = findRoute(path, visited, distance + entry.getValue(), searchType, bestRoute);
+                newBestRoute = findRoute(path, visited, distance + entry.getValue(), searchType, bestRoute);
                 path.removeLast();
                 visited.remove(entry.getKey());
             }
         }
-        return bestRoute;
+        return newBestRoute;
     }
 
 }
