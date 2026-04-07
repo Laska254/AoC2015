@@ -9,8 +9,8 @@ public class Day10 {
 
     public int lengthAfterIterations(final String originalInput, final int iterations) {
         return Stream.iterate(originalInput, this::lookAndSay)
-                .limit(iterations + 1)
-                .reduce((oldWord, newWord) -> newWord)
+                .skip(iterations)
+                .findFirst()
                 .orElse(originalInput)
                 .length();
     }
