@@ -15,20 +15,15 @@ public class Day21 {
     private final ItemShop itemShop = new ItemShop();
 
     public int calculateMinimalGoldToWin() {
-        var minCost = Integer.MAX_VALUE;
-        for (var weapon : itemShop.getWeapons()) {
-            for (var armor : itemShop.getArmors()) {
-                for (var rings : generateRingsCombinations()) {
-                    final var totalCost = calculateTotalCost(weapon, armor, rings);
-                    final var totalDamage = calculateTotalDamage(weapon, rings);
-                    final var totalArmor = calculateTotalArmor(armor, rings);
-                    if (simulateFight(totalDamage, totalArmor)) {
-                        minCost = Math.min(minCost, totalCost);
-                    }
-                }
-            }
-        }
-        return minCost;
+        return itemShop.getWeapons().stream()
+                .flatMapToInt(weapon -> itemShop.getArmors().stream()
+                        .flatMapToInt(armor -> generateRingsCombinations().stream()
+                                .filter(rings -> simulateFight(
+                                        calculateTotalDamage(weapon, rings),
+                                        calculateTotalArmor(armor, rings)))
+                                .mapToInt(rings -> calculateTotalCost(weapon, armor, rings))))
+                .min()
+                .orElseThrow(() -> new IllegalStateException("You're done. Win combination not found."));
     }
 
     private boolean simulateFight(final int playerDamage, final int playerDefense) {
