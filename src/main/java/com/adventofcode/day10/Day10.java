@@ -2,6 +2,7 @@ package com.adventofcode.day10;
 
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Day10 {
@@ -17,11 +18,14 @@ public class Day10 {
     }
 
     public String lookAndSay(final String input) {
-        final var result = new StringBuilder();
-        PATTERN.matcher(input).results()
+        return PATTERN.matcher(input).results()
                 .map(MatchResult::group)
-                .forEach(group -> result.append(group.length()).append(group.charAt(0)));
-        return result.toString();
+                .map(this::encodeGroup)
+                .collect(Collectors.joining());
+    }
+
+    private String encodeGroup(final String group) {
+        return "%d%s".formatted(group.length(), group.charAt(0));
     }
 
 }
