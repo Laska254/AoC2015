@@ -33,7 +33,7 @@ public class Day11 {
 
     private boolean checkIfContainsBannedLetters(String password) {
         return password.chars()
-                .anyMatch(BANNED_LETTERS::contains);
+                .anyMatch(letter -> BANNED_LETTERS.contains((char) letter));
     }
 
     private String incrementPassword(String password) {
