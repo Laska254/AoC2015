@@ -15,7 +15,7 @@ public class Day11 {
         return newPassword;
     }
 
-    private boolean checkIfValid(String password) {
+    public boolean checkIfValid(String password) {
         return increasingStraightOfThreeLetters(password) && !checkIfContainsBannedLetters(password) && password.matches(TWO_DIFFERENT_NON_OVERLAPPING_PAIRS);
     }
 
@@ -48,4 +48,5 @@ public class Day11 {
         }
         return new String(chars);
     }
+
 }
