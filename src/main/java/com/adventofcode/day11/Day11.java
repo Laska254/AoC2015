@@ -1,11 +1,11 @@
 package com.adventofcode.day11;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class Day11 {
 
     private static final List<Character> BANNED_LETTERS = List.of('i', 'o', 'l');
-    private static final String TWO_DIFFERENT_NON_OVERLAPPING_PAIRS = "(?:([a-z])\\1.*([a-z])\\2|[a-z]*([a-z])\\3[a-z]*){2,}";
 
     public String generateNewPassword(final String oldPassword) {
         var newPassword = oldPassword;
@@ -17,8 +17,8 @@ public class Day11 {
 
     public boolean checkIfValid(final String password) {
         return increasingStraightOfThreeLetters(password)
-                && !checkIfContainsBannedLetters(password)
-                && password.matches(TWO_DIFFERENT_NON_OVERLAPPING_PAIRS);
+                && !hasBannedLetters(password)
+                && hasTwoDifferentPairs(password);
     }
 
     private boolean increasingStraightOfThreeLetters(final String password) {
@@ -33,9 +33,23 @@ public class Day11 {
         return false;
     }
 
-    private boolean checkIfContainsBannedLetters(final String password) {
+    private boolean hasBannedLetters(final String password) {
         return password.chars()
                 .anyMatch(letter -> BANNED_LETTERS.contains((char) letter));
+    }
+
+    private boolean hasTwoDifferentPairs(final String password) {
+        final var pairs = new HashSet<>();
+        var i = 0;
+        while (i < password.length() - 1) {
+            if (password.charAt(i) == password.charAt(i + 1)) {
+                pairs.add(password.charAt(i));
+                i += 2;
+            } else {
+                i++;
+            }
+        }
+        return pairs.size() >= 2;
     }
 
     private String incrementPassword(final String password) {
