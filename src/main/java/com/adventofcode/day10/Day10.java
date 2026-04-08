@@ -1,30 +1,31 @@
 package com.adventofcode.day10;
 
+import java.util.regex.MatchResult;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Day10 {
 
-    public int calculate(String original, int n) {
-        return Stream.iterate(original, this::lookAndSay)
-                .limit(n + 1)
-                .reduce((oldWord, newWord) -> newWord)
-                .orElse(original)
+    private static final Pattern PATTERN = Pattern.compile("(.)\\1*");
+
+    public int lengthAfterIterations(final String originalInput, final int iterations) {
+        return Stream.iterate(originalInput, this::lookAndSay)
+                .skip(iterations)
+                .findFirst()
+                .orElse(originalInput)
                 .length();
     }
 
-    private String lookAndSay(String input) {
-        StringBuilder result = new StringBuilder();
-        int counter = 1;
-        for (int i = 0; i < input.length() - 1; i++) {
-            if (input.charAt(i) == input.charAt(i + 1)) {
-                counter++;
-            } else {
-                result.append(counter).append(input.charAt(i));
-                counter = 1;
-            }
-        }
-        return result.append(counter)
-                .append(input.charAt(input.length() - 1))
-                .toString();
+    public String lookAndSay(final String input) {
+        return PATTERN.matcher(input).results()
+                .map(MatchResult::group)
+                .map(this::encodeGroup)
+                .collect(Collectors.joining());
     }
+
+    private String encodeGroup(final String group) {
+        return "%d%s".formatted(group.length(), group.charAt(0));
+    }
+
 }
