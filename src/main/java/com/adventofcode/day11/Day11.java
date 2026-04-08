@@ -2,20 +2,21 @@ package com.adventofcode.day11;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Day11 {
 
     private static final List<Character> BANNED_LETTERS = List.of('i', 'o', 'l');
 
     public String generateNewPassword(final String oldPassword) {
-        var newPassword = oldPassword;
-        do {
-            newPassword = incrementPassword(newPassword);
-        } while (!checkIfValid(newPassword));
-        return newPassword;
+        return Stream.iterate(oldPassword, this::incrementPassword)
+                .skip(1)
+                .filter(this::isValid)
+                .findFirst()
+                .orElseThrow();
     }
 
-    public boolean checkIfValid(final String password) {
+    public boolean isValid(final String password) {
         return increasingStraightOfThreeLetters(password)
                 && !hasBannedLetters(password)
                 && hasTwoDifferentPairs(password);

@@ -28,8 +28,8 @@ class Day11Test {
 
     @ParameterizedTest
     @ValueSource(strings = {"hijklmmn", "abbceffg", "abbcegjk"})
-    void checkIfValid_Fails(String input) {
-        assertFalse(day.checkIfValid(input));
+    void isValid_Fails(String input) {
+        assertFalse(day.isValid(input));
     }
 
     private static Stream<Arguments> args() {
