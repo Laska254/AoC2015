@@ -2,6 +2,7 @@ package com.adventofcode.day11;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Day11 {
@@ -23,15 +24,9 @@ public class Day11 {
     }
 
     private boolean increasingStraightOfThreeLetters(final String password) {
-        for (int i = 0; i < password.length() - 2; i++) {
-            final var first = password.charAt(i);
-            final var second = (char) (first + 1);
-            final var third = (char) (first + 2);
-            if (password.charAt(i + 1) == second && password.charAt(i + 2) == third) {
-                return true;
-            }
-        }
-        return false;
+        return IntStream.range(0, password.length() - 2)
+                .anyMatch(i -> password.charAt(i + 1) == password.charAt(i) + 1
+                        && password.charAt(i + 2) == password.charAt(i) + 2);
     }
 
     private boolean hasBannedLetters(final String password) {
