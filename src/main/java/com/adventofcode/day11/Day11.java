@@ -1,7 +1,7 @@
 package com.adventofcode.day11;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -35,17 +35,11 @@ public class Day11 {
     }
 
     private boolean hasTwoDifferentPairs(final String password) {
-        final var pairs = new HashSet<>();
-        var i = 0;
-        while (i < password.length() - 1) {
-            if (password.charAt(i) == password.charAt(i + 1)) {
-                pairs.add(password.charAt(i));
-                i += 2;
-            } else {
-                i++;
-            }
-        }
-        return pairs.size() >= 2;
+        return IntStream.range(0, password.length() - 1)
+                .filter(i -> password.charAt(i) == password.charAt(i + 1))
+                .mapToObj(password::charAt)
+                .collect(Collectors.toSet())
+                .size() >= 2;
     }
 
     private String incrementPassword(final String password) {
