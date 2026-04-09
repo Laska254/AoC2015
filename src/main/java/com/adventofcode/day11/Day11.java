@@ -45,11 +45,11 @@ public class Day11 {
     private String incrementPassword(final String password) {
         final var chars = password.toCharArray();
         for (int i = chars.length - 1; i >= 0; i--) {
-            if (chars[i] == 'z') {
-                chars[i] = 'a';
-            } else {
-                chars[i] = (char) (chars[i] + 1);
+            if (chars[i] != 'z') {
+                ++chars[i];
                 break;
+            } else {
+                chars[i] = 'a';
             }
         }
         return new String(chars);
