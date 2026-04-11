@@ -14,10 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class Day11Test {
 
     private Day11 day;
+    private Validator validator;
 
     @BeforeEach
     void setUp() {
         day = new Day11();
+        validator = new Validator();
     }
 
     @ParameterizedTest
@@ -29,7 +31,7 @@ class Day11Test {
     @ParameterizedTest
     @ValueSource(strings = {"hijklmmn", "abbceffg", "abbcegjk"})
     void isValid_Fails(String input) {
-        assertFalse(day.isValid(input));
+        assertFalse(validator.isValid(new Password(input)));
     }
 
     private static Stream<Arguments> args() {
