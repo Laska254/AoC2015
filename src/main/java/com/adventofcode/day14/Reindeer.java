@@ -1,13 +1,15 @@
 package com.adventofcode.day14;
 
 public class Reindeer {
+    private final String name;
     private final int speed;
     private final int sprintTime;
     private final int restTime;
     private int score;
     private int traveledDistance;
 
-    public Reindeer(int speed, int sprintTime, int restTime) {
+    public Reindeer(String name, int speed, int sprintTime, int restTime) {
+        this.name = name;
         this.speed = speed;
         this.sprintTime = sprintTime;
         this.restTime = restTime;

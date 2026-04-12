@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Set;
 
 public class Day14 {
-    private final Set<Reindeer> reindeerSet = new HashSet<>();
+    private final Set<Reindeer> reindeerSet;
     private final Set<Reindeer> leaders = new HashSet<>();
 
     public Day14(List<String> input) {
-        input.forEach(this::populate);
+        reindeerSet = ReindeerParser.parseAll(input);
     }
 
     public void run(int time) {
@@ -65,15 +65,6 @@ public class Day14 {
                 .mapToInt(Reindeer::getScore)
                 .min()
                 .orElse(0);
-    }
-
-    private void populate(String line) {
-        String[] split = line.split(" ");
-        Reindeer reindeer = new Reindeer(Integer.parseInt(split[3]),
-                Integer.parseInt(split[6]),
-                Integer.parseInt(split[13])
-        );
-        this.reindeerSet.add(reindeer);
     }
 
 }
