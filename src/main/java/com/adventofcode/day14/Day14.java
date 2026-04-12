@@ -60,6 +60,13 @@ public class Day14 {
                 .orElse(0);
     }
 
+    public int getMinScore() {
+        return reindeerSet.stream()
+                .mapToInt(Reindeer::getScore)
+                .min()
+                .orElse(0);
+    }
+
     private void populate(String line) {
         String[] split = line.split(" ");
         Reindeer reindeer = new Reindeer(Integer.parseInt(split[3]),

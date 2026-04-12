@@ -99,5 +99,36 @@ public class Day14Test {
         }
 
     }
+    
+    @Nested
+    class GetScore {
+
+        // Given the example reindeer from above, after the first second, Dancer is in the lead and gets one point.
+        void after_1s() {
+            day.run(1);
+            assertEquals(1, day.getMaxScore());
+            assertEquals(0, day.getMinScore());
+        }
+
+        // He stays in the lead until several seconds into Comet's second burst: after the 140th second,
+        // Comet pulls into the lead and gets his first point.
+        // Of course, since Dancer had been in the lead for the 139 seconds before that, he has accumulated 139 points by the 140th second.
+        @Test
+        void after_140s() {
+            day.run(140);
+            assertEquals(139, day.getMaxScore());
+            assertEquals(1, day.getMinScore());
+        }
+
+        // After the 1000th second, Dancer has accumulated 689 points,
+        // while poor Comet, our old champion, only has 312.
+        @Test
+        void after_1000s() {
+            day.run(1000);
+            assertEquals(689, day.getMaxScore());
+            assertEquals(312, day.getMinScore());
+        }
+
+    }
 
 }
