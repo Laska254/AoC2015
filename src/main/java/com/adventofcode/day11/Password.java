@@ -5,19 +5,20 @@ import com.adventofcode.day11.rule.BannedLetters;
 public record Password(String value) {
 
     public Password incrementPassword() {
-        final var chars = value.toCharArray();
-        for (int i = chars.length - 1; i >= 0; i--) {
-            if (chars[i] != 'z') {
+        return new Password(increment(value.toCharArray(), value.length() - 1));
+    }
+
+    private String increment(char[] chars, int i) {
+        if (chars[i] != 'z') {
+            ++chars[i];
+            if (BannedLetters.BANNED_LETTERS.contains(chars[i])) {
                 ++chars[i];
-                if (BannedLetters.BANNED_LETTERS.contains(chars[i])) {
-                    chars[i]++;
-                }
-                break;
-            } else {
-                chars[i] = 'a';
             }
+        } else {
+            chars[i] = 'a';
+            increment(chars, i - 1);
         }
-        return new Password(new String(chars));
+        return new String(chars);
     }
 
     public int length() {
