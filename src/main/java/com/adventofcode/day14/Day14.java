@@ -46,6 +46,13 @@ public class Day14 {
                 .orElse(0);
     }
 
+    public int getMinDistance() {
+        return reindeerSet.stream()
+                .mapToInt(Reindeer::getTraveledDistance)
+                .min()
+                .orElse(0);
+    }
+
     public int getMaxScore() {
         return reindeerSet.stream()
                 .mapToInt(Reindeer::getScore)
@@ -61,4 +68,5 @@ public class Day14 {
         );
         this.reindeerSet.add(reindeer);
     }
+
 }
