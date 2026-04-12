@@ -12,17 +12,17 @@ public class Day14 {
         input.forEach(this::populate);
     }
 
-    public void run() {
-        int time = 0;
-        while (time < 2503) {
+    public void run(int time) {
+        int currentTime = 0;
+        while (currentTime < time) {
             int maxDistanceForTurn = 0;
             for (Reindeer reindeer : reindeerSet) {
-                reindeer.move(time);
+                reindeer.move(currentTime);
                 maxDistanceForTurn = getMaxDistanceForTurn(reindeer,
                         maxDistanceForTurn);
             }
             leaders.forEach(Reindeer::addScore);
-            time++;
+            currentTime++;
         }
     }
 
