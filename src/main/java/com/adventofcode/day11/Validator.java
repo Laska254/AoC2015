@@ -9,15 +9,11 @@ import java.util.Set;
 
 public class Validator {
 
-    private final Set<PasswordRule> rules;
-
-    public Validator() {
-        this.rules = Set.of(
-                new BannedLetters(),
-                new IncreasingStraightOfThreeLetters(),
-                new TwoDifferentPairs()
-        );
-    }
+    private final Set<PasswordRule> rules = Set.of(
+            new BannedLetters(),
+            new IncreasingStraightOfThreeLetters(),
+            new TwoDifferentPairs()
+    );
 
     public boolean isValid(final Password password) {
         return rules.stream().allMatch(rule -> rule.isSatisfiedBy(password));
