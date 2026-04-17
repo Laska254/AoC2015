@@ -12,6 +12,7 @@ import com.adventofcode.runner.Day09Runner;
 import com.adventofcode.runner.Day10Runner;
 import com.adventofcode.runner.Day11Runner;
 import com.adventofcode.runner.Day12Runner;
+import com.adventofcode.runner.Day14Runner;
 import com.adventofcode.runner.Day15Runner;
 import com.adventofcode.runner.Day16Runner;
 import com.adventofcode.runner.Day17Runner;
@@ -39,6 +40,7 @@ public final class Calendar {
             Map.entry(10, new Day10Runner()),
             Map.entry(11, new Day11Runner()),
             Map.entry(12, new Day12Runner()),
+            Map.entry(14, new Day14Runner()),
             Map.entry(15, new Day15Runner()),
             Map.entry(16, new Day16Runner()),
             Map.entry(17, new Day17Runner()),
