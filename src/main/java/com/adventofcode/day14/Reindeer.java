@@ -1,6 +1,7 @@
 package com.adventofcode.day14;
 
 public class Reindeer {
+    
     private final String name;
     private final int speed;
     private final int sprintTime;
@@ -8,7 +9,7 @@ public class Reindeer {
     private int score;
     private int traveledDistance;
 
-    public Reindeer(String name, int speed, int sprintTime, int restTime) {
+    public Reindeer(final String name, final int speed, final int sprintTime, final int restTime) {
         this.name = name;
         this.speed = speed;
         this.sprintTime = sprintTime;
@@ -19,14 +20,14 @@ public class Reindeer {
         return traveledDistance;
     }
 
-    public void move(int time) {
+    public void move(final int time) {
         if (check(time)) {
             traveledDistance += speed;
         }
     }
 
-    private boolean check(int time) {
-        int cycle = sprintTime + restTime;
+    private boolean check(final int time) {
+        final var cycle = sprintTime + restTime;
         return (time % (cycle) < sprintTime) || (time % (cycle) == 0);
     }
 
@@ -37,4 +38,5 @@ public class Reindeer {
     public int getScore() {
         return score;
     }
+
 }

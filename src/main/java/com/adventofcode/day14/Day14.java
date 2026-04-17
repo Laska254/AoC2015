@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Day14 {
+
     private final Set<Reindeer> reindeerSet;
     private final Set<Reindeer> leaders = new HashSet<>();
 
@@ -12,10 +13,10 @@ public class Day14 {
         reindeerSet = ReindeerParser.parseAll(input);
     }
 
-    public void run(int time) {
-        int currentTime = 0;
+    public void run(final int time) {
+        var currentTime = 0;
         while (currentTime < time) {
-            int maxDistanceForTurn = 0;
+            var maxDistanceForTurn = 0;
             for (Reindeer reindeer : reindeerSet) {
                 reindeer.move(currentTime);
                 maxDistanceForTurn = getMaxDistanceForTurn(reindeer,
@@ -26,17 +27,18 @@ public class Day14 {
         }
     }
 
-    private int getMaxDistanceForTurn(Reindeer reindeer, int maxDistanceForTurn) {
-        int traveledDistance = reindeer.getTraveledDistance();
-        if (traveledDistance > maxDistanceForTurn) {
-            maxDistanceForTurn = traveledDistance;
+    private int getMaxDistanceForTurn(final Reindeer reindeer, final int maxDistanceForTurn) {
+        var maxDistance = maxDistanceForTurn;
+        var traveledDistance = reindeer.getTraveledDistance();
+        if (traveledDistance > maxDistance) {
+            maxDistance = traveledDistance;
             leaders.clear();
             leaders.add(reindeer);
         }
-        if (traveledDistance == maxDistanceForTurn) {
+        if (traveledDistance == maxDistance) {
             leaders.add(reindeer);
         }
-        return maxDistanceForTurn;
+        return maxDistance;
     }
 
     public int getMaxDistance() {
