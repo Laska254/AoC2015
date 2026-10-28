@@ -1,6 +1,5 @@
 package com.adventofcode;
 
-import com.adventofcode.day98.Day98;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,7 @@ class MainTest {
 
         @Test
         void shouldReportNotSolvedYetWhenPartTwoIsNotOverridden() {
-            final var solution = new Day98(0);
+            final Solution solution = input -> 0;
             assertEquals("Day 98 · part 2: not solved yet", Main.line(98, 2, () -> solution.partTwo("")));
         }
 
