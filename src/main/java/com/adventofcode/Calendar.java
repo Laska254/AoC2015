@@ -1,6 +1,5 @@
 package com.adventofcode;
 
-import com.adventofcode.runner.Day01Runner;
 import com.adventofcode.runner.Day02Runner;
 import com.adventofcode.runner.Day03Runner;
 import com.adventofcode.runner.Day04Runner;
@@ -27,7 +26,6 @@ import java.util.function.Consumer;
 public final class Calendar {
 
     private static final Map<Integer, Consumer<InputProvider>> RUNNERS = Map.ofEntries(
-            Map.entry(1, new Day01Runner()),
             Map.entry(2, new Day02Runner()),
             Map.entry(3, new Day03Runner()),
             Map.entry(4, new Day04Runner()),
