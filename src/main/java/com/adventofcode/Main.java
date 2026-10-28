@@ -53,7 +53,7 @@ public class Main {
         final var prefix = "Day " + day + " · part " + part + ": ";
         try {
             return prefix + answer.get();
-        } catch (final UnsupportedOperationException exception) {
+        } catch (final NotSolvedYetException exception) {
             return prefix + "not solved yet";
         }
     }
