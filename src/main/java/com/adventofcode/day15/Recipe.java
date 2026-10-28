@@ -38,6 +38,10 @@ public class Recipe {
         generateAllRecipes(chosen, new ArrayList<>(ingredients), 0, 0, n - 1);
     }
 
+    public int getMaxScore() {
+        return maxScore;
+    }
+
     private Integer calculateScore(Map<Ingredient, Integer> recipe) {
         int totalCapacity = 0;
         int totalDurability = 0;
