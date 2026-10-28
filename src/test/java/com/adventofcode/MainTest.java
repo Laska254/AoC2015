@@ -15,7 +15,7 @@ class MainTest {
 
         @Test
         void shouldFormatDayPartAndAnswer() {
-            assertEquals("Day 1 · part 1: 42", Main.line(1, 1, () -> 42));
+            assertEquals("Day 7 · part 1: 42", Main.line(7, 1, () -> 42));
         }
 
         @Test
