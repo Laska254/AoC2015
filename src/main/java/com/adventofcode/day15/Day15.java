@@ -24,7 +24,7 @@ public class Day15 {
         Recipe recipe = new Recipe();
         recipe.findBestRecipe(ingredients, ingredients.size());
         System.out.println(recipe);
-        return 0;
+        return recipe.getMaxScore();
     }
 
     private void addIngredient(String line) {
