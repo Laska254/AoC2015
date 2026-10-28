@@ -25,7 +25,7 @@ The shortest of these is `London -> Dublin -> Belfast = 605`, and so the answer 
 
 What is the distance of the shortest route?
 
-To begin, [get your puzzle input](https://github.com/turczak/AoC2015/tree/main/src/main/resources/inputs/day09.txt).
+To begin, [get your puzzle input](https://adventofcode.com/2015/day/9/input).
 
 Your puzzle answer was `117`.
 

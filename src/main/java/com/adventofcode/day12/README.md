@@ -18,7 +18,7 @@ You will not encounter any strings containing numbers.
 
 What is the **sum of all numbers** in the document?
 
-To begin, [get your puzzle input](https://github.com/turczak/AoC2015/tree/main/src/main/resources/inputs/day12.json).
+To begin, [get your puzzle input](https://adventofcode.com/2015/day/12/input).
 
 Your puzzle answer was `156366`.
 

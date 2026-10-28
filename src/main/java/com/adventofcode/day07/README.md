@@ -53,7 +53,7 @@ y: 456`
 In little Bobby's kit's instructions booklet (provided as your puzzle input), what signal is ultimately provided to wire
 a?
 
-To begin, [get your puzzle input](https://github.com/turczak/AoC2015/tree/main/src/main/resources/inputs/day07.txt).
+To begin, [get your puzzle input](https://adventofcode.com/2015/day/7/input).
 
 Your puzzle answer was `16076`.
 

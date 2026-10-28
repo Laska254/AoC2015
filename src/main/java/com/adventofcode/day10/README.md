@@ -18,8 +18,6 @@ For example:
 
 Starting with the digits in your puzzle input, apply this process 40 times. What is the **length of the result**?
 
-Your puzzle input is `3113322113`.
-
 Your puzzle answer was `329356`.
 
 ## --- Part Two ---

@@ -22,7 +22,7 @@ For example:
 
 To <code style="color : lightskyblue">what floor</code>do the instructions take Santa?
 
-To begin, get your puzzle [input](https://github.com/turczak/AoC2015/tree/main/src/main/resources/inputs/day01.txt).
+To begin, get your puzzle [input](https://adventofcode.com/2015/day/1/input).
 
 Your puzzle answer was `74`.
 

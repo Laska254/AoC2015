@@ -30,7 +30,7 @@ number of characters in memory for the values of the strings** in total for the 
 For example, given the four strings above, the total number of characters of string code (`2 + 5 + 10 + 6 = 23`) minus
 the total number of characters in memory for string values (`0 + 3 + 7 + 1 = 11`) is `23 - 11 = 12`.
 
-To begin, [get your puzzle input](https://github.com/turczak/AoC2015/tree/main/src/main/resources/inputs/day08.txt).
+To begin, [get your puzzle input](https://adventofcode.com/2015/day/8/input).
 
 Your puzzle answer was `1371`.
 
