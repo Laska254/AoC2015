@@ -2,6 +2,7 @@ package com.adventofcode;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
@@ -19,6 +20,8 @@ public final class Days {
         }
         try {
             return Optional.of(type.asSubclass(Solution.class).getDeclaredConstructor().newInstance());
+        } catch (final InvocationTargetException exception) {
+            throw new IllegalStateException(type.getName() + " failed to construct", exception.getCause());
         } catch (final ReflectiveOperationException exception) {
             throw new IllegalStateException(type.getName() + " needs a public no-arg constructor", exception);
         }
