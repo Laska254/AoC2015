@@ -66,6 +66,12 @@ class Day01Test {
             assertEquals(5, day01.partTwo("()())"));
         }
 
+        // `((` never enters the basement; positions start at 1, so 0 means "never".
+        @Test
+        void shouldReturnZeroWhenBasementIsNeverReached() {
+            assertEquals(0, day01.partTwo("(("));
+        }
+
     }
 
 }
