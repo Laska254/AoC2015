@@ -13,8 +13,12 @@ public class Day14 {
     }
 
     public void run() {
+        run(2503);
+    }
+
+    public void run(final int seconds) {
         int time = 0;
-        while (time < 2503) {
+        while (time < seconds) {
             int maxDistanceForTurn = 0;
             for (Reindeer reindeer : reindeerSet) {
                 reindeer.move(time);
