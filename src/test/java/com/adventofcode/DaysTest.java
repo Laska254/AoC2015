@@ -32,13 +32,13 @@ class DaysTest {
         @Test
         void shouldFailWhenSolutionHasNoNoArgConstructor() {
             final var exception = assertThrows(IllegalStateException.class, () -> Days.solution(98));
-            assertTrue(exception.getMessage().contains("needs a public no-arg constructor"));
+            assertEquals("com.adventofcode.day98.Day98 needs a public no-arg constructor", exception.getMessage());
         }
 
         @Test
         void shouldReportConstructorFailureWithItsCause() {
             final var exception = assertThrows(IllegalStateException.class, () -> Days.solution(96));
-            assertTrue(exception.getMessage().contains("failed to construct"));
+            assertEquals("com.adventofcode.day96.Day96 failed to construct", exception.getMessage());
             assertInstanceOf(IllegalArgumentException.class, exception.getCause());
         }
 
