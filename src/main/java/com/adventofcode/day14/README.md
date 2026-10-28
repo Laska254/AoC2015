@@ -47,7 +47,7 @@ Again given the descriptions of each reindeer (in your puzzle input), after exac
 does the winning reindeer have**?
 
 Although it hasn't changed, you can
-still [get your puzzle input](https://github.com/turczak/AoC2015/tree/main/src/main/resources/inputs/day14.txt).
+still [get your puzzle input](https://adventofcode.com/2015/day/14/input).
 
 Your puzzle answer was `1059`.
 

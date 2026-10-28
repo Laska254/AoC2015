@@ -11,7 +11,7 @@ For example:
 - `^>v<` delivers presents to `4` houses in a square, including twice to the house at his starting/ending location.
 - `^v^v^v^v^v` delivers a bunch of presents to some very lucky children at only `2` houses.
 
-To begin, [get your puzzle input](https://github.com/turczak/AoC2015/tree/main/src/main/resources/inputs/day03.txt).
+To begin, [get your puzzle input](https://adventofcode.com/2015/day/3/input).
 
 Your puzzle answer was `2592`.
 

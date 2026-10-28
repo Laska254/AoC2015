@@ -21,7 +21,7 @@ For example:
 
 How many strings are nice?
 
-To begin, [get your puzzle input](https://github.com/turczak/AoC2015/tree/main/src/main/resources/inputs/day05.txt).
+To begin, [get your puzzle input](https://adventofcode.com/2015/day/5/input).
 
 Your puzzle answer was `258`.
 
