@@ -42,21 +42,20 @@ public class Main {
     private static void run(final int day, final Solution solution) {
         Days.input(day).ifPresentOrElse(
                 input -> {
-                    print(day, 1, () -> solution.partOne(input));
-                    print(day, 2, () -> solution.partTwo(input));
+                    System.out.println(line(day, 1, () -> solution.partOne(input)));
+                    System.out.println(line(day, 2, () -> solution.partTwo(input)));
                 },
                 () -> System.out.println("put your input at src/main/resources/" + Days.inputPath(day))
         );
     }
 
-    private static void print(final int day, final int part, final Supplier<Object> answer) {
-        String result;
+    static String line(final int day, final int part, final Supplier<Object> answer) {
+        final var prefix = "Day " + day + " · part " + part + ": ";
         try {
-            result = String.valueOf(answer.get());
+            return prefix + answer.get();
         } catch (final UnsupportedOperationException exception) {
-            result = "not solved yet";
+            return prefix + "not solved yet";
         }
-        System.out.println("Day " + day + " · part " + part + ": " + result);
     }
 
 }
