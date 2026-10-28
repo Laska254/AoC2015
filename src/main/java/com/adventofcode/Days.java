@@ -19,7 +19,10 @@ public final class Days {
             return Optional.empty();
         }
         try {
-            return Optional.of(type.asSubclass(Solution.class).getDeclaredConstructor().newInstance());
+            final var solution = type.asSubclass(Solution.class)
+                    .getDeclaredConstructor()
+                    .newInstance();
+            return Optional.of(solution);
         } catch (final InvocationTargetException exception) {
             throw new IllegalStateException(type.getName() + " failed to construct", exception.getCause());
         } catch (final ReflectiveOperationException exception) {
@@ -28,7 +31,8 @@ public final class Days {
     }
 
     public static Optional<String> input(final int day) {
-        try (final var stream = Days.class.getClassLoader().getResourceAsStream(inputPath(day))) {
+        try (final var stream = Days.class.getClassLoader()
+                .getResourceAsStream(inputPath(day))) {
             if (stream == null) {
                 return Optional.empty();
             }
