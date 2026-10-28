@@ -25,6 +25,14 @@ public class Day17 {
         System.out.println("Number of combinations using that many containers: " + ways);
     }
 
+    public int getCombinations() {
+        return combinations;
+    }
+
+    public int getWaysWithMinimumContainers() {
+        return solutions.get(Collections.min(solutions.keySet()));
+    }
+
     private void findCombinations(int index, int currentSum, int usedContainers) {
         if (currentSum == targetSum) {
             combinations++;
