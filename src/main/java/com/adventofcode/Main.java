@@ -2,6 +2,7 @@ package com.adventofcode;
 
 import java.nio.file.ProviderNotFoundException;
 import java.util.Scanner;
+import java.util.function.Supplier;
 
 public class Main {
 
@@ -23,6 +24,11 @@ public class Main {
                     System.out.println("Invalid input. Please select day (1-25)");
                     continue;
                 }
+                final var solution = Days.solution(choice);
+                if (solution.isPresent()) {
+                    run(choice, solution.get());
+                    continue;
+                }
                 try {
                     final var runner = Calendar.getRunner(choice);
                     runner.accept(inputProvider);
@@ -30,6 +36,25 @@ public class Main {
                     System.out.println("Day " + choice + " not implemented yet.");
                 }
             }
+        }
+    }
+
+    private static void run(final int day, final Solution solution) {
+        Days.input(day).ifPresentOrElse(
+                input -> {
+                    System.out.println(line(day, 1, () -> solution.partOne(input)));
+                    System.out.println(line(day, 2, () -> solution.partTwo(input)));
+                },
+                () -> System.out.println("put your input at src/main/resources/" + Days.inputPath(day))
+        );
+    }
+
+    static String line(final int day, final int part, final Supplier<Object> answer) {
+        final var prefix = "Day " + day + " · part " + part + ": ";
+        try {
+            return prefix + answer.get();
+        } catch (final NotSolvedYetException exception) {
+            return prefix + "not solved yet";
         }
     }
 

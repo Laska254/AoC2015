@@ -17,13 +17,6 @@ public class InputProvider {
         }
     }
 
-    public List<Character> inputAsListOfCharacters(final Path path) {
-        return inputAsString(path)
-                .chars()
-                .mapToObj(c -> (char) c)
-                .toList();
-    }
-
     public List<List<Integer>> inputAsListOfListsOfDimensions(final Path path) {
         try {
             return Files.lines(path)
