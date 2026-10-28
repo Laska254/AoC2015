@@ -1,26 +1,29 @@
 package com.adventofcode.day01;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.IntStream;
+import com.adventofcode.Solution;
 
-public class Day01 {
+public class Day01 implements Solution {
 
-    public int calculateFloor(final List<Character> inputList) {
-        return inputList.stream()
-                .mapToInt(this::checkFloor)
+    @Override
+    public Integer partOne(final String input) {
+        return input.chars()
+                .map(this::checkFloor)
                 .sum();
     }
 
-    public int findPositionOfBasementEnter(List<Character> inputList) {
-        final var floor = new AtomicInteger(0);
-        return IntStream.rangeClosed(1, inputList.size())
-                .filter(i -> floor.addAndGet(checkFloor(inputList.get(i - 1))) == -1)
-                .findFirst()
-                .orElse(0);
+    @Override
+    public Integer partTwo(final String input) {
+        var floor = 0;
+        for (var position = 1; position <= input.length(); position++) {
+            floor += checkFloor(input.charAt(position - 1));
+            if (floor == -1) {
+                return position;
+            }
+        }
+        return 0;
     }
 
-    private int checkFloor(final char character) {
+    private int checkFloor(final int character) {
         return switch (character) {
             case '(' -> 1;
             case ')' -> -1;
