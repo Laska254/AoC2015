@@ -5,44 +5,53 @@ import java.util.List;
 import java.util.Set;
 
 public class Day14 {
-    private final Set<Reindeer> reindeerSet = new HashSet<>();
+
+    private final Set<Reindeer> reindeerSet;
     private final Set<Reindeer> leaders = new HashSet<>();
 
     public Day14(List<String> input) {
-        input.forEach(this::populate);
+        reindeerSet = ReindeerParser.parseAll(input);
     }
 
-    public void run() {
-        int time = 0;
-        while (time < 2503) {
-            int maxDistanceForTurn = 0;
+    public void run(final int time) {
+        var currentTime = 0;
+        while (currentTime < time) {
+            var maxDistanceForTurn = 0;
             for (Reindeer reindeer : reindeerSet) {
-                reindeer.move(time);
+                reindeer.move(currentTime);
                 maxDistanceForTurn = getMaxDistanceForTurn(reindeer,
                         maxDistanceForTurn);
             }
             leaders.forEach(Reindeer::addScore);
-            time++;
+            currentTime++;
         }
     }
 
-    private int getMaxDistanceForTurn(Reindeer reindeer, int maxDistanceForTurn) {
-        int traveledDistance = reindeer.getTraveledDistance();
-        if (traveledDistance > maxDistanceForTurn) {
-            maxDistanceForTurn = traveledDistance;
+    private int getMaxDistanceForTurn(final Reindeer reindeer, final int maxDistanceForTurn) {
+        var maxDistance = maxDistanceForTurn;
+        var traveledDistance = reindeer.getTraveledDistance();
+        if (traveledDistance > maxDistance) {
+            maxDistance = traveledDistance;
             leaders.clear();
             leaders.add(reindeer);
         }
-        if (traveledDistance == maxDistanceForTurn) {
+        if (traveledDistance == maxDistance) {
             leaders.add(reindeer);
         }
-        return maxDistanceForTurn;
+        return maxDistance;
     }
 
     public int getMaxDistance() {
         return reindeerSet.stream()
                 .mapToInt(Reindeer::getTraveledDistance)
                 .max()
+                .orElse(0);
+    }
+
+    public int getMinDistance() {
+        return reindeerSet.stream()
+                .mapToInt(Reindeer::getTraveledDistance)
+                .min()
                 .orElse(0);
     }
 
@@ -53,12 +62,11 @@ public class Day14 {
                 .orElse(0);
     }
 
-    private void populate(String line) {
-        String[] split = line.split(" ");
-        Reindeer reindeer = new Reindeer(Integer.parseInt(split[3]),
-                Integer.parseInt(split[6]),
-                Integer.parseInt(split[13])
-        );
-        this.reindeerSet.add(reindeer);
+    public int getMinScore() {
+        return reindeerSet.stream()
+                .mapToInt(Reindeer::getScore)
+                .min()
+                .orElse(0);
     }
+
 }
