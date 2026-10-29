@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Day15 {
+
     private final Pattern pattern = Pattern.compile(
             "^(?<name>\\w+): " +
                     "capacity (?<capacity>-?\\d+), " +
@@ -39,4 +40,5 @@ public class Day15 {
             ingredients.add(new Ingredient(name, capacity, durability, flavor, texture, calories));
         }
     }
+
 }
